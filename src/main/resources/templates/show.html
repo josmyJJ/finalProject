@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>View Message Detail</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+
+<div class="container bg-light">
+    <h3 class="p-4">Course Details</h3>
+    <hr/>
+
+    <div class="space"></div>
+
+        <div>
+            <img th:src="${message.postImg}" alt="post image"/>
+            <div class="space"></div>
+        </div>
+
+        <div>
+            <div th:text="${message.content}"> </div>
+        </div>
+
+        <div>
+            Posted by: <strong><span th:text="${message.user.username}"></span></strong> on
+            <span
+                th:text="${message.datePosted}"></span>
+        </div>
+
+        <div class="emptySpace"></div>
+    </div>
+
+</body>
+</html>

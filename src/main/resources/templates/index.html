@@ -1,12 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-    <h2>Insecure Page</h2>
-    <a href="/secure">Secure Page</a>
+<div th:replace="base :: nav"></div>
 
+<div class="container bg-light pl-5 pr-5">
+
+    <h3 class="p-4">HarrisonCollege</h3>
+    <hr/>
+
+    <div align="center">
+        <div class="row text-center">
+            <!--<div th:if="${not #lists.isEmpty(messages}">No content yet.</div>-->
+            <div th:each="message : ${messages}">
+                <div class="col-sm">
+                    <div class="space"></div>
+
+
+                    <div class="img-box">
+                        <img class="pet-img" th:src="@{${message.postImg}}" alt="post image"/>
+                    </div>
+
+                    <div class="pet-info-bx">
+
+                        <div class="cont-box">
+                            <div th:text="${message.content}"></div>
+                        </div>
+                        <div class="foun-box">
+                            <div th:text="${message.petFound}"></div>
+                        </div>
+
+                    </div>
+                    <!--<div>-->
+                        <!--&lt;!&ndash;<img id="gravatar" th:src="'http://gravatar.com/avatar/' + ${message.user.hash} + '?s=20'"&ndash;&gt;-->
+                        <!--&lt;!&ndash;alt="gravatar"/> &ndash;&gt;-->
+                        <!--&lt;!&ndash;<strong><a th:href="@{/user/{id}(id=${message.user.id})}"><span&ndash;&gt;-->
+                        <!--&lt;!&ndash;th:text="${message.user.username}"></span></a></strong>&ndash;&gt;-->
+                        <!--<span th:text="${#dates.format(message.posteddate, 'dd MMM yyyy')}"></span>-->
+                    <!--</div>-->
+                    <div>
+                        <span th:text="${message.datePosted}"></span>
+                    </div>
+                    <div>
+                        <span sec:authorize="hasAuthority('USER')">
+                            <a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                        </span>
+
+                        <!--<span th:if="${#authentication.roles } == ${message.username}">-->
+                            <!--<a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>-->
+                        <!--</span>-->
+
+                        <span sec:authorize="hasAuthority('ADMIN')">
+                            <a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                        </span>
+
+                        <a class="btn btn-info" th:href="@{/detail/{id}(id=${message.id})}">View</a>
+
+
+                        <span sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info"
+                                                                      th:href="@{/delete/{id}(id=${message.id})}">Delete</a></span>
+
+                        <div class="space"></div>
+                        <!--<a class="text-secondary" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>-->
+                    </div>
+                </div>
+            </div><!--end div row-->
+        </div>
+        <div class="emptySpace"></div>
+    </div>
+
+    <footer th:replace="base :: footer"></footer>
+    <br/>
+</div>
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="www.thymeleaf.org">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Insecure Page</h2>-->
+<!--<a href="/secure">Secure Page</a>-->
+
+<!--</body>-->
+<!--</html>-->

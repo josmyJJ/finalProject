@@ -6,22 +6,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Spring security example</title>
+    <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
 
+<div th:replace="base :: nav"></div>
+
+<div class="space"></div>
+<div class="container bg-light">
     <!--Error message if the login details are incorrect -->
-    <div th:if="${param.error}">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
+
 
     <form th:action="@{/login}" method="post">
+        <h3 class="p-4">Please Login</h3>
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+
+        <hr/>
+        <div class="space"></div>
         <div><label> User name: <input type="text" name="username" /> </label> </div>
         <div><label> Password: <input type="password" name="password" /> </label> </div>
         <div><input type="submit" value="Sign In" /> </div>
+        <div class="space"></div>
     </form>
-
+</div>
+<div class="space"></div>
 </body>
 </html>

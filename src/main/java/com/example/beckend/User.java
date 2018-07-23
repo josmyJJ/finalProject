@@ -1,7 +1,4 @@
-package com.example.lesson17;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+package com.example.beckend;
 
 //import javax.management.relation.Role;
 import javax.persistence.*;

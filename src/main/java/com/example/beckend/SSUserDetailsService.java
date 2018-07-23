@@ -1,4 +1,4 @@
-package com.example.lesson17;
+package com.example.beckend;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 

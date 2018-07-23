@@ -1,4 +1,4 @@
-package com.example.lesson17;
+package com.example.beckend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

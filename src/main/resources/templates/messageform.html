@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Add New Message</title>
+    <link th:href="@{/css/messageform.css}" rel="stylesheet"/>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light">
+
+    <h3 class="p-4">Add A Course</h3>
+    <hr/>
+
+    <div class="row text-center pl-5">
+        <form action="#"
+              th:action="@{/process}"
+              th:object="${message}"
+              enctype="multipart/form-data"
+              method="post">
+
+            <input type="hidden" th:field="*{id}">
+
+            <input type="hidden" th:value="${user_id}" name="user_id">
+
+            <div class="form-group row">
+                <label for="inputDetails" class="col-sm-2 col-form-label">Details</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="inputDetails" rows="3" th:field="*{content}"></textarea>
+                </div>
+            </div>
+
+
+            <!--&lt;!&ndash;<input type="text" th:field="*{posteddate}" value="${#dates.format(#dates.createNow(), 'dd/MMM/yyyy HH:mm')}"/>&ndash;&gt;-->
+            <!--<div class="form-group">-->
+                <!--<label for="messageInput">Message</label>-->
+                <!--<textarea class="form-control" id="messageInput" rows="3" th:field="*{content}"></textarea>-->
+                <!--&lt;!&ndash;Message: <textarea class="form-text" rows="5" th:field="*{content}"/><br/>&ndash;&gt;-->
+            <!--</div>-->
+
+
+            <div class="form-group row">
+                <label for="petFoundSelect" class="col-sm-2 col-form-label">Found: </label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="petFoundSelect" rows="1" th:field="*{petFound}"></textarea>
+                </div>
+            </div>
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="petFoundSelect">Example select</label>-->
+                <!--<select class="form-control" id="petFoundSelect">-->
+                    <!--<option>I found my pet</option>-->
+                    <!--<option>I haven't found my pet</option>-->
+                <!--</select>-->
+                <!--&lt;!&ndash;Is Pet Found?  <textarea class="form-text" rows="1" th:field="*{petFound}"/><br/>&ndash;&gt;-->
+            <!--</div>-->
+
+
+            <!--<div class="form-group row">-->
+                <!--<label for="dateInput" class="col-sm-2 col-form-label">Post Date: </label>-->
+                <!--<div class="col-sm-10">-->
+                    <!--<span class="text-danger" id="dateInput" th:if="${#fields.hasErrors('datePosted')}" th:errors="*{datePosted}">-->
+                    <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+
+            <!--<div class="form-group">-->
+                <!--<label for="dateInput">Message Post Date</label>-->
+                <!--<span class="text-danger" id="dateInput" th:if="${#fields.hasErrors('datePosted')}" th:errors="*{datePosted}">-->
+            <!--</span><br />-->
+                <!--<textarea class="form-control" id="messageInput" rows="3" th:field="*{content}"></textarea>-->
+                <!--Message: <textarea class="form-text" rows="5" th:field="*{content}"/><br/>-->
+            <!--</div>-->
+
+            <div class="form-group row">
+                <label for="postDt" class="col-sm-2 col-form-label">Post Date</label>
+                <div class="col-sm-10">
+                    <input type="date" th:field="*{datePosted}" />
+                    <span class="text-danger" id="postDt" th:if="${#fields.hasErrors('datePosted')}" th:errors="*{datePosted}">
+                    </span><br />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <!--<span id="imgURL" th:inline="text">[[${imageLabel}]]</span>: <input class="form-control-file" type="file" name="file"/>-->
+                <!--<span id="imgURL" th:inline="text">[[${imageLabel}]]</span>: -->
+                <input class="form-control-file" type="file" name="file"/>
+                <input type="hidden" th:value="${imageURL}" name="hiddenImgURL"/>
+            </div>
+
+
+
+            <!--<div class="form-group row">-->
+                <!--&lt;!&ndash;<label for="imgURL" class="col-sm-2 col-form-label">Image: </label>&ndash;&gt;-->
+                <!--<div class="col-sm-10">-->
+                    <!--<div class="form-group">-->
+                        <!--<span id="imgURL" th:inline="text">[[${imageLabel}]]</span>: <input class="form-control-file" type="file" name="file"/>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div th:if="${imageURL != null}" class="img-width">-->
+                <!--<img class="pet-img" th:src="${imageURL}" alt="Pet image"/>-->
+            <!--</div>-->
+
+            <!--<input type="hidden" th:value="${imageURL}" name="hiddenImgURL"/>-->
+
+            <!--<div class="form-group">-->
+                <!--<span th:inline="text">[[${imageLabel}]]</span>: <input class="form-control-file" type="file" name="file"/>-->
+            <!--</div>-->
+            <input class="submit-btn" type="submit" value="Submit"/>
+            <div class="space"></div>
+        </form>
+    </div>
+</div>
+<footer th:replace="base :: footer"></footer>
+</body>
+</html>

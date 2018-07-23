@@ -1,0 +1,85 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/catBack.jpeg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+h1,h2,h3,h4,h5,h6, .navbar{
+    font-family: 'Shadows Into Light', cursive;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.emptySpace{
+    height: 100px;
+}
+
+.space{
+    height: 20px;
+}
+
+.table-background{
+    background-color: rgb(245, 239, 213) !important;
+    opacity: .95;
+}
+
+/*.thead-background{*/
+    /*background-color: rgb(115, 99, 2) !important;*/
+/*}*/
+
+.bg-background{
+    opacity: .98;
+    background-color: rgb(245, 239, 213) !important;
+    padding: 40px;
+    margin-bottom: 20px;
+
+}
+.title-heading{
+    /*color: rgb(141, 27, 55) !important;*/
+    color: rgb(216, 113, 72) !important;
+    font-size: 40px;
+}
+
+.nav-background{
+    /*background-color: rgb(130, 90, 2) !important;*/
+    background-color: rgb(115, 99, 2) !important;
+    color: #ffffff;
+}
+
+.pet-img{
+    /*max-width: 250px;*/
+    width: 250px;
+    max-height: 150px;
+}
+
+.img-box{
+    margin: 1px 25px;
+    height: 200px;
+}
+
+.cont-box{
+    margin: 0px 25px;
+    max-width: 255px;
+    max-height: 150px;
+    padding: 0 5px;
+}
+.foun-box{
+    margin: 1px 25px;
+    max-width: 255px;
+}
+
+.row{
+    /*width: 1120px;*/
+    margin: 0 auto;
+}
