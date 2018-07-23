@@ -1,6 +1,8 @@
-package com.example.beckend;
+package com.example.model;
 
 //import javax.management.relation.Role;
+import com.example.model.Role;
+
 import javax.persistence.*;
 import java.util.Collection;
 

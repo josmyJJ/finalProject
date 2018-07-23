@@ -27,13 +27,41 @@
                 <!--<li sec:authorize="isAuthenticated()" class="nav-item text-light active">-->
                     <!--<a class="nav-link text-info" href="/myprofile">My Profile</a>-->
                 <!--</li>-->
-                <li class="nav-item text-light">
-                    <a class="nav-link text-info" href="/">Home</a>
+                <!--<li class="nav-item text-light">-->
+                    <!--<a class="nav-link text-info" href="/">Home</a>-->
+                <!--</li>-->
+                <!--<li sec:authorize="isAuthenticated()" class="nav-item text-light">-->
+                    <!--<a class="nav-link text-info" href="/add">Add Course</a>-->
+                <!--</li>-->
+                <!--<li sec:authorize="isAuthenticated()" class="nav-item text-light">-->
+                    <!--<a class="nav-link text-info" href="/admin">Admin</a>-->
+                <!--</li>-->
+
+                <li sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link text-info" href="/admin">Admin</a>
                 </li>
 
-                <li sec:authorize="isAuthenticated()" class="nav-item text-light">
-                    <a class="nav-link text-info" href="/add">Add Course</a>
+                <li sec:authorize="hasAuthority('INSTRUCTOR')">
+                    <a class="nav-link text-info" href="/instructor">Instructor</a>
                 </li>
+
+
+                <li sec:authorize="hasAuthority('STUDENT')">
+                    <a class="nav-link text-info" href="/student">Student</a>
+                </li>
+
+                <li sec:authorize="hasAuthority('ADVISOR')">
+                    <a class="nav-link text-info" href="/advisor">Advisor</a>
+                </li>
+
+
+                <!--<li sec:authorize="isAuthenticated()" class="nav-item text-light">-->
+                    <!--<a class="nav-link text-info" href="/advisor">Advisor</a>-->
+                <!--</li>-->
+
+                <!--<li sec:authorize="isAuthenticated()" class="nav-item text-light">-->
+                    <!--<a class="nav-link text-info" href="/instructor">Instructor</a>-->
+                <!--</li>-->
                 <li class="nav-item">
                     <a sec:authorize="!isAuthenticated()" class="nav-link text-info" href="/login">Login</a>
                 </li>

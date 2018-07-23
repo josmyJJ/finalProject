@@ -15,35 +15,40 @@
     <div align="center">
         <div class="row text-center">
             <!--<div th:if="${not #lists.isEmpty(messages}">No content yet.</div>-->
-            <div th:each="message : ${messages}">
+            <div th:each="course : ${courses}">
                 <div class="col-sm">
                     <div class="space"></div>
 
 
-                    <div class="img-box">
-                        <img class="pet-img" th:src="@{${message.postImg}}" alt="post image"/>
-                    </div>
+                    <!--<div class="img-box">-->
+                        <!--<img class="pet-img" th:src="@{${message.postImg}}" alt="post image"/>-->
+                    <!--</div>-->
 
-                    <div class="pet-info-bx">
+                    <!--<div class="pet-info-bx">-->
 
-                        <div class="cont-box">
-                            <div th:text="${message.content}"></div>
-                        </div>
-                        <div class="foun-box">
-                            <div th:text="${message.petFound}"></div>
-                        </div>
-
-                    </div>
-                    <!--<div>-->
-                        <!--&lt;!&ndash;<img id="gravatar" th:src="'http://gravatar.com/avatar/' + ${message.user.hash} + '?s=20'"&ndash;&gt;-->
+                        <!--<div class="cont-box">-->
+                            <!--<div th:text="${course.subjectCode}"></div>-->
+                        <!--</div>-->
+                        <!--<div class="foun-box">-->
+                            <!--<div th:text="${course.name}"></div>-->
+                        <!--</div>-->
+                        <!--<div class="foun-box">-->
+                            <!--<div th:text="${course.numOfCredits}"></div>-->
+                        <!--</div>-->
+                        <!--<div class="foun-box">-->
+                            <!--<div th:text="${course.numOfCredits}"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;<img id="gravatar" th:src="'http://gravatar.com/avatar/' + ${message.user.hash} + '?s=20'"&ndash;&gt;&ndash;&gt;-->
                         <!--&lt;!&ndash;alt="gravatar"/> &ndash;&gt;-->
                         <!--&lt;!&ndash;<strong><a th:href="@{/user/{id}(id=${message.user.id})}"><span&ndash;&gt;-->
                         <!--&lt;!&ndash;th:text="${message.user.username}"></span></a></strong>&ndash;&gt;-->
                         <!--<span th:text="${#dates.format(message.posteddate, 'dd MMM yyyy')}"></span>-->
                     <!--</div>-->
-                    <div>
-                        <span th:text="${message.datePosted}"></span>
-                    </div>
+                    <!--<div>-->
+                        <!--<span th:text="${message.datePosted}"></span>-->
+                    <!--</div>-->
                     <div>
                         <span sec:authorize="hasAuthority('USER')">
                             <a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>

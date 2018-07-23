@@ -1,4 +1,4 @@
-package com.example.beckend;
+package com.example.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

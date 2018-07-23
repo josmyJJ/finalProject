@@ -12,12 +12,17 @@ public class Student {
     private  long id;
     private int number;
     private String name;
-    private String major;
+//    private String major;
     private String yearOfEntry;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "class_id")
     private Class classObject;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "major_id")
+    private Major major;
 
 
     public Student() {
@@ -47,13 +52,13 @@ public class Student {
         this.name = name;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
+//    public String getMajor() {
+//        return major;
+//    }
+//
+//    public void setMajor(String major) {
+//        this.major = major;
+//    }
 
     public String getYearOfEntry() {
         return yearOfEntry;

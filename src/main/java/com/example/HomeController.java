@@ -1,6 +1,14 @@
-package com.example.beckend;
+package com.example;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.example.beckend.CloudinaryConfig;
+import com.example.beckend.UserService;
+import com.example.model.Course;
+import com.example.model.Pet;
+import com.example.model.User;
+import com.example.repository.CourseRepository;
+import com.example.repository.PetRepository;
+import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,9 +38,13 @@ public class HomeController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    CourseRepository courseRepository;
+
     @RequestMapping("/")
     public String index(@ModelAttribute Pet message, Model model){
         model.addAttribute("messages", petRepository.findAll());
+        model.addAttribute("courses", courseRepository.findAll());
         return "index";
     }
 
@@ -41,10 +53,30 @@ public class HomeController {
         return "login";
     }
 
-//    @RequestMapping("/admin")
-//    public String admin(){
-//        return "admin";
-//    }
+    @RequestMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @RequestMapping("/student")
+    public String student(){
+        return "student";
+    }
+
+    @RequestMapping("/advisor")
+    public String advisor(){
+        return "advisor";
+    }
+
+    @RequestMapping("/instructor")
+    public String instructor(){
+        return "instructor";
+    }
+
+    @RequestMapping("/course")
+    public String course(){
+        return "course";
+    }
 
     @RequestMapping("/secure")
     public String secure(){
@@ -58,46 +90,53 @@ public class HomeController {
         String currentusername = authentication.getName();
         User user = userRepository.findByUsername(currentusername);
         model.addAttribute("user_id",user.getId());
-        model.addAttribute("imageLabel", "Upload Image");
-        model.addAttribute("message", new Pet());
+//        model.addAttribute("imageLabel", "Upload Image");
+        model.addAttribute("message", new Course());
+        model.addAttribute("course", new Course());
+
         return "messageform";
     }
 
+
+
     @PostMapping("/process")
-    public String processForm(HttpServletRequest request, @Valid @ModelAttribute Pet message, BindingResult result,
-                              @RequestParam("file") MultipartFile
-            file, @RequestParam("hiddenImgURL") String ImgURL) {
+    public String processForm(HttpServletRequest request, @Valid @ModelAttribute Course course, BindingResult result
+//                              @RequestParam("file") MultipartFile file
+    ) {
+
+//        @RequestParam("hiddenImgURL") String ImgURL
         User user = getUser();
 
-        if (file.isEmpty()) {
-            return "redirect:/add";
-        }
-        if (!file.isEmpty()) {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(),
-                        ObjectUtils.asMap("resourcetype", "auto"));
-                message.setPostImg(uploadResult.get("url").toString());
-
-//                user.setHash(user.getEmail());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/add";
-            }
-//            catch (NoSuchAlgorithmException e) {
+//        if (file.isEmpty()) {
+//            return "redirect:/add";
+//        }
+//        if (!file.isEmpty()) {
+//            try {
+//                Map uploadResult = cloudc.upload(file.getBytes(),
+//                        ObjectUtils.asMap("resourcetype", "auto"));
+//                message.setPostImg(uploadResult.get("url").toString());
+//
+////                user.setHash(user.getEmail());
+//            } catch (IOException e) {
 //                e.printStackTrace();
 //                return "redirect:/add";
 //            }
-        } else {
-            if (!ImgURL.isEmpty()) {
-                message.setPostImg(ImgURL);
-            } else {
-                message.setPostImg("");
-            }
-        }
+////            catch (NoSuchAlgorithmException e) {
+////                e.printStackTrace();
+////                return "redirect:/add";
+////            }
+//        }
+//        else {
+//            if (!ImgURL.isEmpty()) {
+//                message.setPostImg(ImgURL);
+//            } else {
+//                message.setPostImg("");
+//            }
+//        }
 
-        message.setUser(user);
-        message.setPosteddate();
-        petRepository.save(message);
+//        message.setUser(user);
+//        message.setPosteddate();
+        courseRepository.save(course);
         return "redirect:/";
     }
 

@@ -1,5 +1,8 @@
 package com.example.beckend;
 
+import com.example.model.Role;
+import com.example.model.User;
+import com.example.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

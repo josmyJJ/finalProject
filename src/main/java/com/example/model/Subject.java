@@ -3,26 +3,20 @@ package com.example.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-
 @Entity
-@Table(name="Major")
-public class Major {
-
+public class Subject {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "subject_id")
     private  long id;
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "department_id")
-    private Department department;
+    @OneToMany(mappedBy="subject")
+    private Collection<Course> courses;
 
-    @OneToMany(mappedBy="major")
-    private Collection<Student> students;
-
-    public Major() {
-    }
+    @OneToMany(mappedBy="subject")
+    private Collection<Class> classes;
 
     public long getId() {
         return id;
@@ -38,5 +32,13 @@ public class Major {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
     }
 }

@@ -13,16 +13,14 @@ public class Department {
     @Column(name = "department_id")
     private  long id;
 
-    private int departmentID;
     private String name;
 
     @OneToMany(mappedBy = "department")
-
     private Collection<Major> majors;
 
-    public int getDepartmentID() {
-        return departmentID;
-    }
+    @OneToMany(mappedBy = "department")
+    private Collection<Instructor> instructors;
+
 
     public long getId() {
         return id;
@@ -30,10 +28,6 @@ public class Department {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setDepartmentID(int departmentID) {
-        this.departmentID = departmentID;
     }
 
     public String getName() {

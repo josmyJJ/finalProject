@@ -15,11 +15,16 @@ public class Instructor {
     private  long id;
     private int employeeNumber;
     private String name;
-    private String department;
+//    private String department;
     private int officeNumber;
 
     @OneToMany(mappedBy="instructor")
     private Collection<Class> classes;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
 
     public Instructor() {
     }
@@ -47,14 +52,14 @@ public class Instructor {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
+//
+//    public String getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(String department) {
+//        this.department = department;
+//    }
 
     public int getOfficeNumber() {
         return officeNumber;

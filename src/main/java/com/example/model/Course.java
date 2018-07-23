@@ -1,7 +1,5 @@
 package com.example.model;
 
-import com.example.beckend.Role;
-
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -14,7 +12,8 @@ public class Course {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "course_id")
     private  long id;
-    private int number;
+
+    private int crn;
     private String subjectCode;
     private String name;
     private String detail;
@@ -22,6 +21,12 @@ public class Course {
 
     @OneToMany(mappedBy="course")
     private Collection<Class> classes;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
 
     public Course() {
     }
@@ -34,12 +39,12 @@ public class Course {
         this.id = id;
     }
 
-    public int getNumber() {
-        return number;
+    public int getCrn() {
+        return crn;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setCrn(int crn) {
+        this.crn = crn;
     }
 
     public String getSubjectCode() {
@@ -72,5 +77,21 @@ public class Course {
 
     public void setNumOfCredits(int numOfCredits) {
         this.numOfCredits = numOfCredits;
+    }
+
+    public Collection<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Collection<Class> classes) {
+        this.classes = classes;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 }

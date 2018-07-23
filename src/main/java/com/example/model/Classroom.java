@@ -1,10 +1,11 @@
 package com.example.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Entity
-@Table(name="Classroom")
+@Table(name="ClassroomRepository")
 public class Classroom {
 
     @Id
@@ -14,6 +15,9 @@ public class Classroom {
     private int roomNumber;
     private int maxCapacity;
 
+
+    @OneToMany(mappedBy="classroom")
+    private Collection<Class> classes;
 
     public Classroom() {
     }
