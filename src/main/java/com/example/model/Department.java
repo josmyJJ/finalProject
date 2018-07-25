@@ -20,10 +20,21 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private Collection<Instructor> instructors;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(joinColumns = @JoinColumn(name="department_id"),
-            inverseJoinColumns = @JoinColumn(name="course_id"))
+
+    @OneToMany(mappedBy = "department")
     private Collection<Course> courses;
+
+    @OneToMany(mappedBy="department")
+    private Collection<Major> majors;
+
+
+
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(joinColumns = @JoinColumn(name="department_id"),
+//            inverseJoinColumns = @JoinColumn(name="course_id"))
+//    private Collection<Course> courses;
+
 
     public Department() {
     }
@@ -33,6 +44,14 @@ public class Department {
         this.students = students;
         this.instructors = instructors;
         this.courses = courses;
+    }
+
+    public Collection<Major> getMajors() {
+        return majors;
+    }
+
+    public void setMajors(Collection<Major> majors) {
+        this.majors = majors;
     }
 
     public long getId() {
@@ -49,5 +68,29 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Collection<Student> students) {
+        this.students = students;
+    }
+
+    public Collection<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(Collection<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public Collection<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Collection<Course> courses) {
+        this.courses = courses;
     }
 }

@@ -23,6 +23,12 @@ public class Student {
 //            inverseJoinColumns = @JoinColumn(name="class_id"))
 //    private Collection<Class> classes;
 
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "major_id")
+    private Major major;
+
+
     @OneToMany
     @JoinTable
             (
@@ -40,6 +46,38 @@ public class Student {
     private Collection<Grade> grades;
 
     public Student() {
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Collection<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Collection<Grade> grades) {
+        this.grades = grades;
     }
 
     public long getId() {

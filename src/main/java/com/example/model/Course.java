@@ -26,8 +26,16 @@ public class Course {
     @OneToMany(mappedBy="course")
     private Collection<Grade> grades;
 
-    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
-    private Collection<Department> departments;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "major_id")
+    private Major major;
+
+
+
 
     @OneToMany
     @JoinTable
@@ -41,6 +49,7 @@ public class Course {
     public Course() {
     }
 
+
     public Course(int crn, String subjectCode, String name, String detail, int numOfCredits, Collection<Class> classes, Collection<Department> departments) {
         this.crn = crn;
         this.subjectCode = subjectCode;
@@ -48,7 +57,14 @@ public class Course {
         this.detail = detail;
         this.numOfCredits = numOfCredits;
         this.classes = classes;
-        this.departments = departments;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     public long getId() {
@@ -107,4 +123,27 @@ public class Course {
         this.classes = classes;
     }
 
+    public Collection<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Collection<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
 }

@@ -4,6 +4,7 @@ import com.example.beckend.CloudinaryConfig;
 import com.example.model.*;
 import com.example.model.Class;
 import com.example.repository.*;
+import com.example.service.Interface.ICourseService;
 import com.example.service.Interface.IStudentService;
 import com.example.service.Interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,14 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+
     @Autowired
     private IStudentService studentService;
+
+    // CHANGES I MADE
+    @Autowired
+    private ICourseService courseService;
+
 
     @Autowired
     private IUserService UserService;
@@ -71,7 +78,6 @@ public class HomeController {
         return "admin";
     }
 
-
     @RequestMapping("/student")
     public String student(){
         return "student";
@@ -105,8 +111,6 @@ public class HomeController {
         String currentusername = authentication.getName();
         User user = UserService.findByUsername(currentusername);
         model.addAttribute("user_id",user.getId());
-//        model.addAttribute("imageLabel", "Upload Image");
-//        model.addAttribute("message", new Course());
         model.addAttribute("course", new Course());
         return "addcourse";
     }
@@ -130,7 +134,7 @@ public class HomeController {
     }
 
 
-    //department
+    // DEPARTMENT
     @GetMapping("/adddepartment")
     public String adddepartment(Model model){
         model.addAttribute("department", new Department());
@@ -144,8 +148,8 @@ public class HomeController {
         return "redirect:/";
     }
 
-//    ADD CLASSROOM
 
+    // ADD CLASSROOM
     @GetMapping("/addclassroom")
     public String addclassroom(Model model){
         model.addAttribute("classroom", new Classroom());
@@ -159,7 +163,6 @@ public class HomeController {
         return "redirect:/";
     }
 
-    //Login
 
 
     @GetMapping("/addclass")
@@ -174,7 +177,6 @@ public class HomeController {
         //return "index";
         return "redirect:/";
     }
-
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistrationPage(
@@ -192,9 +194,8 @@ public class HomeController {
     }
 
     @RequestMapping("/schedule")
-    public String studentSchedul(Model model){
+    public String studentSchedule(Model model){
         model.addAttribute("students", studentService.getAllStudents());
-
         List<Student> students = studentService.getAllStudents();
         for (Iterator<Student> s = students.iterator(); s.hasNext();) {
             Student item = s.next();
@@ -202,6 +203,29 @@ public class HomeController {
         }
         return "studentschedule";
     }
+
+
+    // ADVISOR STUFF
+    // CHANGES I'VE MADE
+    @RequestMapping("/advisorPage")
+    public String advisorPage(Model model){
+        model.addAttribute("students", studentService.getAllStudents());
+        model.addAttribute("courses", courseService.getAllCourse());
+
+
+        List<Student> students = studentService.getAllStudents();
+        for (Iterator<Student> s = students.iterator(); s.hasNext();) {
+            Student item = s.next();
+            System.out.println(item.getName());
+        }
+        List<Course> course = courseService.getAllCourse();
+        for (Iterator<Course> c = course.iterator(); c.hasNext();) {
+            Course item = c.next();
+            System.out.println(item.getName());
+        }
+        return "studentdetails";
+    }
+
 
     protected User getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

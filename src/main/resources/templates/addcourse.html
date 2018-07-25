@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Add New Message</title>
-    <link th:href="@{/css/messageform.css}" rel="stylesheet"/>
+    <title>Home</title>
     <th:block th:insert="base :: header"></th:block>
 </head>
 <body>
-
 <div th:replace="base :: nav"></div>
 
-<div class="container bg-light">
+<div class="container bg-light pl-5 pr-5">
 
-    <h3 class="p-4">Add A Course</h3>
+    <h3 class="p-4">Add Class</h3>
     <hr/>
 
     <div class="row text-center pl-5">
@@ -30,21 +28,33 @@
                 <div class="col-sm-10">
                     <textarea class="form-control" id="subjectCode" rows="1" th:field="*{subjectCode}"></textarea>
                 </div>
+
+                <label for="courseCrn" class="col-sm-2 col-form-label">CRN</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="courseCrn" rows="1" th:field="*{crn}"></textarea>
+                </div>
+
+                <label for="courseName" class="col-sm-2 col-form-label">Course title</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="courseName" rows="1" th:field="*{name}"></textarea>
+                </div>
+
+                <label for="courseDetail" class="col-sm-2 col-form-label">Course detail</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="courseDetail" rows="1" th:field="*{detail}"></textarea>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="departmentInput">Department</label>
-                <select class="form-control" id="departmentInput" th:field="*{department_id}">
-                    <option th:each="aDepartment : ${departments}" th:value="${aDepartment.id}"
-                            th:text="${aDepartment.name}"></option>
-                </select>
-            </div>
+
+
 
             <input class="submit-btn" type="submit" value="Submit"/>
             <div class="space"></div>
         </form>
     </div>
+
 </div>
+
 <footer th:replace="base :: footer"></footer>
 </body>
 </html>
