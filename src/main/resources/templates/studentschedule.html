@@ -31,6 +31,106 @@
         <br/>
     </div>
 
+<<<<<<< HEAD
+=======
+    <!--//-->
+    <!--classroom:-->
+    <!--<div th:each="classroom : ${classrooms}">-->
+        <!--<span th:text="${classroom.buildingName}"></span> &nbsp;-->
+        <!--<span th:text="${classroom.roomNumber}"></span> &nbsp;-->
+        <!--<span th:text="${classroom.maxCapacity}"></span>&nbsp;-->
+    <!--</div>-->
+
+    <!--//-->
+    <table>
+        <tr>
+            <td>crn: </td>
+            <td>time: </td>
+            <td>course number: </td>
+            <td>subject code: </td>
+
+            v<td>instructor: </td>
+            <td>room number: </td>
+
+        </tr>
+        <tr th:each="class: ${classes}">
+            <!--<td><span th:text="${class.crn}"></span></td>-->
+            <!--<td><span th:text="${class.classNum}"></span></td>-->
+            <!--<td><span th:text="${class.day}"></span></td>-->
+            <!--<td><span th:text="${class.time}"></span></td>-->
+            <!--<td><span th:text="${class.semester}"></span></td>-->
+            <!--<td><span th:text="${class.course.courseName}"></span></td>-->
+            <!--<td><span th:text="${class.course.subject.subjectName}"></span></td>-->
+            <!--<td><span th:text="${class.course.credit}"></span></td>-->
+            <!--<td><span th:text="${class.instructor.instructorName}"></span></td>-->
+            <!--<td><span th:text="${class.classroom.roomNum}"></span></td>-->
+            <!--<td><a th:href="@{/register/{id} {(id=${class.id})}}" class="btn btn-lg btn-success">Resister</a></td>-->
+
+
+            <!--<tr>-->
+            <td><span th:text="${class.crnNumber}"></span></td>
+            <td><span th:text="${class.time}"></span></td>
+            <td><span th:text="${class.courseNumber}"></span></td>
+            <td><span th:text="${class.subjectCode}"></span></td>
+
+        <!--<tr th:each="classroom : ${classes}">-->
+            <!--<td><span th:text="${class.instructor.instructorName}"></span>-->
+            <!--<td><span th:text="${class.classroom.roomNumber}"></span></td>-->
+            <!--<td><span th:text="${roomNumber.classroom}"></span></td>  -->
+
+        <!--</tr>-->
+            <!--</tr>-->
+        </tr>
+    </table>
+
+        <!--<div th:each="class: ${classes}">-->
+            <!--<h2 th:text="${class.crnNumber}"></h2>-->
+
+            <!--<th:block th:each=" class : ${classroom.classes}">-->
+
+            <!--</th:block>-->
+
+    relationship:
+            <!--<div th:each="classroom: ${classroom}">-->
+                <!--<h2 th:text="${classroom.roomNumber}"></h2>-->
+                <!--<ul>-->
+                <!--<th:block th:each=" class : ${classroom.classes}">-->
+                    <!--&lt;!&ndash;<li th:inline="text"> [[${class.time}]] </li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li th:inline="text"> [[${class.crnNumber}]] </li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li th:inline="text"> [[${class.courseNumber}]] </li>&ndash;&gt;-->
+                    <!--<li th:inline="text"> [[${class.subjectCode}]] </li>-->
+
+                <!--</th:block>-->
+                <!--</ul>-->
+            <!--</div>-->
+
+        <div th:each="classroom: ${classroom}">
+            <h2 th:text="${classroom.roomNumber}"></h2>
+            <ul>
+                <th:block th:each=" class : ${classroom.classes}">
+                    <!--<li th:inline="text"> [[${class.time}]] </li>-->
+                    <!--<li th:inline="text"> [[${class.crnNumber}]] </li>-->
+                    <!--<li th:inline="text"> [[${class.courseNumber}]] </li>-->
+                    <li th:inline="text"> [[${class.subjectCode}]] </li>
+                    <!--<h2 th:text="${class.subjectCode}"></h2>-->
+
+                </th:block>
+            </ul>
+        </div>
+
+    <!--<tbody>-->
+    <!--<tr th:each="class : ${st.classes}">-->
+        <!--<td><span th:text="${class.crn}"></span></td>-->
+        <!--<td><span th:text="${class.course.courseName}"></span></td>-->
+        <!--<td><span th:text="${class.day}"></span></td>-->
+        <!--<td><span th:text="${class.time}"></span></td>-->
+        <!--<td><span th:text="${class.classroom.buildingName}"></span></td>-->
+        <!--<td><span th:text="${class.classroom.roomNum}"></span></td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+
+    <div class="emptySpace"></div>
+>>>>>>> 49231d5913f65672a6db015f3d4d322ff28acc1d
 
 </div>
 
