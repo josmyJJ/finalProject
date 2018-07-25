@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+    <h3> Add classroom</h3>
+
+    <form th:action="@{/processclassroom}" th:object="${classroom}" method="post">
+
+        <input type="hidden" th:field="*{id}"/>
+
+        BuildingName : <input type="text" th:field="*{buildingName}" /> <br>
+
+        Roomnumber : <input type="text" th:field="*{roomNumber}" /> <br>
+
+        Maxcapacity : <input type="text" th:field="*{maxCapacity}" /> <br>
+
+        <input type="submit" value="Submit" />
+    </form>
+
+</div>
+<div class="emptySpace"></div>
+
+
+<footer th:replace="base :: footer"></footer>
+<br/>
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+    Add Class
+
+    <form action="#" th:action="@{/processclass}" th:object="${aclass}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        subjectCode : <input type="text" th:field="*{subjectCode}" />
+        crnNumber : <input type="text" th:field="*{crnNumber}" />
+        courseNumber : <input type="text" th:field="*{courseNumber}" />
+        time : <input type="text" th:field="*{time}" />
+
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+
+
+</div>
+<div class="emptySpace"></div>
+
+<footer th:replace="base :: footer"></footer>
+<br/>
+
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>

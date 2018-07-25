@@ -27,4 +27,6 @@ public interface IStudentService {
     List<Course> GetAllCoursesByDepartmentID(int departmentId);
     List<Class> GetClassesOfUserDepartmentById(int studentId, int department);
 //    List<Major> GetAllMajorsByDepartmentId(int department);
+
+
 }

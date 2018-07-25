@@ -3,7 +3,6 @@ package com.example.model;
 import javax.persistence.*;
 import java.util.Collection;
 
-
 @Entity
 @Table(name="Department")
 public class Department {

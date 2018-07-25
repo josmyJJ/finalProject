@@ -15,12 +15,12 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private StudentRepository StudentRepository;
+
     @Override
     public List<Student> getAllStudents() {
         List<Student> list = new ArrayList<>();
         StudentRepository.findAll().forEach(e -> list.add(e));
         return list;
-
     }
 
     @Override

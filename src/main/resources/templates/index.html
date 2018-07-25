@@ -12,95 +12,43 @@
     <h3 class="p-4">HarrisonCollege</h3>
     <hr/>
 
-    <!--<div align="center">-->
-    <!--<h5 class="pl-4">Students</h5>-->
-
-        <div class="row">
-            <!--<div th:if="${not #lists.isEmpty(messages}">No content yet.</div>-->
-
-
-            <div th:each="student : ${students}">
-
-                <!--<div class="cont-box">-->
-                <!--<span>Student Name</span>-->
-                <!--<div th:text="${student.name}"></div>-->
-                Student Name: <span th:inline="text">[[${student.name}]]</span> &nbsp;
-
-                Student ID: <span th:inline="text">[[${student.id}]]</span> &nbsp;
-
-                Student number: <span th:inline="text">[[${student.number}]]</span> &nbsp;
-
-                Student Year of Entry: <span th:inline="text">[[${student.yearOfEntry}]]</span> &nbsp;
-
-                <br/>
-
-                <!--<span>Student ID</span>-->
-                <!--<div th:text="${student.id}"></div>-->
-
-                <!--<span>Student Number</span>-->
-                <!--<div th:text="${student.number}"></div>-->
-
-                <!--<span>Student Year of Entry</span>-->
-                <!--<div th:text="${student.yearOfEntry}"></div>-->
-
-                <!--</div>-->
-
-            </div>
-
-
-            <div th:each="course : ${courses}">
+    <h5>Department</h5>
+    <div th:each="department : ${departments}">
+        <span th:text="${department.name}"></span> &nbsp;
+    </div>
+    <div class="space"></div>
+    <h5>Class</h5>
+    <div th:each="class : ${classes}">
+        <span th:text="${class.crnNumber}"></span>&nbsp;
+        <span th:text="${class.time}"></span>&nbsp;
+        <span th:text="${class.courseNumber}"></span>&nbsp;
+        <span th:text="${class.subjectCode}"></span>&nbsp;
+    </div>
+    <div class="space"></div>
+    <h5>Classroom</h5>
+    <div th:each="classroom : ${classrooms}">
+        <span th:text="${classroom.buildingName}"></span> &nbsp;
+        <span th:text="${classroom.roomNumber}"></span> &nbsp;
+        <span th:text="${classroom.maxCapacity}"></span>&nbsp;
+    </div>
+    <div class="space"></div>
+    <div th:each="course : ${courses}">
                 <div class="col-sm">
                     <div class="space"></div>
-
-
-                    <!--<div class="img-box">-->
-                        <!--<img class="pet-img" th:src="@{${message.postImg}}" alt="post image"/>-->
-                    <!--</div>-->
-
-                    <!--<div class="pet-info-bx">-->
-
-                        <!--<div class="cont-box">-->
-                            <!--<div th:text="${course.subjectCode}"></div>-->
-                        <!--</div>-->
-                        <!--<div class="foun-box">-->
-                            <!--<div th:text="${course.name}"></div>-->
-                        <!--</div>-->
-                        <!--<div class="foun-box">-->
-                            <!--<div th:text="${course.numOfCredits}"></div>-->
-                        <!--</div>-->
-                        <!--<div class="foun-box">-->
-                            <!--<div th:text="${course.numOfCredits}"></div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;<div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;&lt;!&ndash;<img id="gravatar" th:src="'http://gravatar.com/avatar/' + ${message.user.hash} + '?s=20'"&ndash;&gt;&ndash;&gt;-->
-                        <!--&lt;!&ndash;alt="gravatar"/> &ndash;&gt;-->
-                        <!--&lt;!&ndash;<strong><a th:href="@{/user/{id}(id=${message.user.id})}"><span&ndash;&gt;-->
-                        <!--&lt;!&ndash;th:text="${message.user.username}"></span></a></strong>&ndash;&gt;-->
-                        <!--<span th:text="${#dates.format(message.posteddate, 'dd MMM yyyy')}"></span>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<span th:text="${message.datePosted}"></span>-->
-                    <!--</div>-->
                     <div>
                         <span sec:authorize="hasAuthority('USER')">
                             <a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>
                         </span>
-
                         <!--<span th:if="${#authentication.roles } == ${message.username}">-->
                             <!--<a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>-->
                         <!--</span>-->
-
                         <span sec:authorize="hasAuthority('ADMIN')">
                             <a class="btn btn-info" th:href="@{/update/{id}(id=${message.id})}">Update</a>
                         </span>
 
                         <a class="btn btn-info" th:href="@{/detail/{id}(id=${message.id})}">View</a>
-
-
                         <span sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info"
                                                                       th:href="@{/delete/{id}(id=${message.id})}">Delete</a></span>
-
                         <div class="space"></div>
                         <!--<a class="text-secondary" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>-->
                     </div>
@@ -119,15 +67,6 @@
 </html>
 
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="www.thymeleaf.org">-->
-<!--<head>-->
-<!--<meta charset="UTF-8">-->
-<!--<title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Insecure Page</h2>-->
-<!--<a href="/secure">Secure Page</a>-->
 
-<!--</body>-->
-<!--</html>-->
+
+
