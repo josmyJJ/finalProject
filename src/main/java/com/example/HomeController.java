@@ -153,15 +153,17 @@ public class HomeController {
     }
 
     @PostMapping("/processclassroom")
-    public String processclassroom(@ModelAttribute("classroom") Classroom classroom){
+    public String processclassroom(@ModelAttribute("classroom") Classroom classroom, Model model){
         classroomRepository.save(classroom);
+
+        //model.addAttribute("classroom", classroomRepository.findAll());
         //return "index";
         return "redirect:/";
     }
 
     //Login
 
-
+    //add class
     @GetMapping("/addclass")
     public String addclass(Model model){
         model.addAttribute("aclass", new Class());
@@ -209,4 +211,39 @@ public class HomeController {
         User user = UserService.findByUsername(currentusername);
         return user;
     }
+
+    //enroll class
+    @RequestMapping("/enroll/{id}")
+    public String enroll(@PathVariable("id") long id, Model model){
+        //model.addAttribute("class", classRepository.findById(id).get());
+        model.addAttribute("class", classRepository.findById(id));
+        //return "classpage";
+        return "index";
+    }
+    //drop class
+    @RequestMapping("/drop/{id}")
+    public String drop(@PathVariable("id") long id, Model model){
+        classRepository.deleteById(id);
+        model.addAttribute(classRepository.findAll());
+//        return "index";
+        return "redirect:/";
+    }
+
+    //student schedule
+//    @RequestMapping("/studentschedule")
+//    public String stdentschedule(Model model){
+//
+//        model.addAttribute(classroomRepository.findAll());
+//        return "studentschedule";
+//    }
+
+    //@RequestMapping("/viewclass")
+    @RequestMapping("/studentschedule")
+    public String viewClass(Model model) {
+        model.addAttribute("classes", classRepository.findAll());
+        model.addAttribute("classroom", classroomRepository.findAll());
+        //return "classlist";
+        return "studentschedule";
+    }
+
 }
