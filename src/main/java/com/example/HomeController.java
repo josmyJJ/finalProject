@@ -1,14 +1,12 @@
 package com.example;
 
-import com.cloudinary.utils.ObjectUtils;
 import com.example.beckend.CloudinaryConfig;
-import com.example.beckend.UserService;
 import com.example.model.Course;
-import com.example.model.Pet;
+import com.example.model.Student;
 import com.example.model.User;
 import com.example.repository.CourseRepository;
-import com.example.repository.PetRepository;
-import com.example.repository.UserRepository;
+import com.example.service.Interface.IStudentService;
+import com.example.service.Interface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,24 +14,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private IStudentService studentService;
 
     @Autowired
-    private UserService userService;
+    private IUserService UserService;
 
-    @Autowired
-    PetRepository petRepository;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     CloudinaryConfig cloudc;
@@ -42,9 +35,17 @@ public class HomeController {
     CourseRepository courseRepository;
 
     @RequestMapping("/")
-    public String index(@ModelAttribute Pet message, Model model){
-        model.addAttribute("messages", petRepository.findAll());
-        model.addAttribute("courses", courseRepository.findAll());
+    public String index(){
+
+//        model.addAttribute("courses", courseRepository.findAll());
+//
+//        model.addAttribute("students", studentService.getAllStudents());
+//        List<Student> students = studentService.getAllStudents();
+//        for (Iterator<Student> s = students.iterator(); s.hasNext();) {
+//            Student item = s.next();
+//            System.out.println(item.getName());
+//        }
+//        return "student";
         return "index";
     }
 
@@ -57,6 +58,7 @@ public class HomeController {
     public String admin(){
         return "admin";
     }
+
 
     @RequestMapping("/student")
     public String student(){
@@ -83,61 +85,16 @@ public class HomeController {
         return "secure";
     }
 
-
     @GetMapping("/add")
     public String messageForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentusername = authentication.getName();
-        User user = userRepository.findByUsername(currentusername);
+        User user = UserService.findByUsername(currentusername);
         model.addAttribute("user_id",user.getId());
 //        model.addAttribute("imageLabel", "Upload Image");
-        model.addAttribute("message", new Course());
+//        model.addAttribute("message", new Course());
         model.addAttribute("course", new Course());
-
         return "messageform";
-    }
-
-
-
-    @PostMapping("/process")
-    public String processForm(HttpServletRequest request, @Valid @ModelAttribute Course course, BindingResult result
-//                              @RequestParam("file") MultipartFile file
-    ) {
-
-//        @RequestParam("hiddenImgURL") String ImgURL
-        User user = getUser();
-
-//        if (file.isEmpty()) {
-//            return "redirect:/add";
-//        }
-//        if (!file.isEmpty()) {
-//            try {
-//                Map uploadResult = cloudc.upload(file.getBytes(),
-//                        ObjectUtils.asMap("resourcetype", "auto"));
-//                message.setPostImg(uploadResult.get("url").toString());
-//
-////                user.setHash(user.getEmail());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "redirect:/add";
-//            }
-////            catch (NoSuchAlgorithmException e) {
-////                e.printStackTrace();
-////                return "redirect:/add";
-////            }
-//        }
-//        else {
-//            if (!ImgURL.isEmpty()) {
-//                message.setPostImg(ImgURL);
-//            } else {
-//                message.setPostImg("");
-//            }
-//        }
-
-//        message.setUser(user);
-//        message.setPosteddate();
-        courseRepository.save(course);
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -155,44 +112,27 @@ public class HomeController {
         if(result.hasErrors()){
             return "registration";
         }else{
-            userService.saveUser(user);
+            UserService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
         }
         return "index";
     }
 
-    @RequestMapping("/detail/{id}")
-    public String showCourse(@PathVariable("id") long id, Model model) {
-        model.addAttribute("message", petRepository.findById(id).get());
-        return "show";
-    }
-
-    @RequestMapping("/update/{id}")
-    public String updateCourse(@ModelAttribute Pet message, @PathVariable
-            ("id") long id, Model model) {
-        message = petRepository.findById(id).get();
-        model.addAttribute("message", petRepository.findById(id));
-        model.addAttribute("imageURL", message.getPostImg());
-
-        if(message.getPostImg().isEmpty()) {
-            model.addAttribute("imageLabel", "Upload Image");
+    @RequestMapping("/schedule")
+    public String studentSchedul(Model model){
+        model.addAttribute("students", studentService.getAllStudents());
+        List<Student> students = studentService.getAllStudents();
+        for (Iterator<Student> s = students.iterator(); s.hasNext();) {
+            Student item = s.next();
+            System.out.println(item.getName());
         }
-        else {
-            model.addAttribute("imageLabel", "Upload New Image");
-        }
-        return "messageform";
-    }
-
-    @RequestMapping("/delete/{id}")
-    public String delCourse(@PathVariable("id") long id){
-        petRepository.deleteById(id);
-        return "redirect:/";
+        return "studentschedule";
     }
 
     protected User getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentusername = authentication.getName();
-        User user = userRepository.findByUsername(currentusername);
+        User user = UserService.findByUsername(currentusername);
         return user;
     }
 }

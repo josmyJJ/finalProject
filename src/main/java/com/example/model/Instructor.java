@@ -19,12 +19,16 @@ public class Instructor {
     private int officeNumber;
 
     @OneToMany(mappedBy="instructor")
-    private Collection<Class> classes;
+    private Collection<Grade> grades;
 
+    @OneToMany(mappedBy="instructor")
+    private Collection<Class> classes;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
+
+
 
     public Instructor() {
     }

@@ -12,9 +12,42 @@
     <h3 class="p-4">HarrisonCollege</h3>
     <hr/>
 
-    <div align="center">
-        <div class="row text-center">
+    <!--<div align="center">-->
+    <!--<h5 class="pl-4">Students</h5>-->
+
+        <div class="row">
             <!--<div th:if="${not #lists.isEmpty(messages}">No content yet.</div>-->
+
+
+            <div th:each="student : ${students}">
+
+                <!--<div class="cont-box">-->
+                <!--<span>Student Name</span>-->
+                <!--<div th:text="${student.name}"></div>-->
+                Student Name: <span th:inline="text">[[${student.name}]]</span> &nbsp;
+
+                Student ID: <span th:inline="text">[[${student.id}]]</span> &nbsp;
+
+                Student number: <span th:inline="text">[[${student.number}]]</span> &nbsp;
+
+                Student Year of Entry: <span th:inline="text">[[${student.yearOfEntry}]]</span> &nbsp;
+
+                <br/>
+
+                <!--<span>Student ID</span>-->
+                <!--<div th:text="${student.id}"></div>-->
+
+                <!--<span>Student Number</span>-->
+                <!--<div th:text="${student.number}"></div>-->
+
+                <!--<span>Student Year of Entry</span>-->
+                <!--<div th:text="${student.yearOfEntry}"></div>-->
+
+                <!--</div>-->
+
+            </div>
+
+
             <div th:each="course : ${courses}">
                 <div class="col-sm">
                     <div class="space"></div>

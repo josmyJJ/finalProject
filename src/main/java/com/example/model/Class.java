@@ -20,26 +20,24 @@ public class Class {
 
     private String subjectCode;
 
-
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    @OneToMany(mappedBy="classObject")
-    private Collection<Student> students;
+    @JoinColumn(name = "semester_id")
+    private Semester semester;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
+
+//    @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
+//    private Collection<Student> students;
 
 
     public Class() {
@@ -61,13 +59,13 @@ public class Class {
         this.course = course;
     }
 
-    public Collection<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Collection<Student> students) {
-        this.students = students;
-    }
+//    public Collection<Student> getStudents() {
+//        return students;
+//    }
+//
+//    public void setStudents(Collection<Student> students) {
+//        this.students = students;
+//    }
 
     public Instructor getInstructor() {
         return instructor;

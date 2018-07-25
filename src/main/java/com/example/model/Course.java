@@ -2,6 +2,7 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -22,13 +23,32 @@ public class Course {
     @OneToMany(mappedBy="course")
     private Collection<Class> classes;
 
+    @OneToMany(mappedBy="course")
+    private Collection<Grade> grades;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
+    private Collection<Department> departments;
 
+    @OneToMany
+    @JoinTable
+            (
+                    name = "StudentCourse",
+                    joinColumns = { @JoinColumn(name="course_id", referencedColumnName = "course_id") },
+                    inverseJoinColumns = { @JoinColumn(name="student_id", referencedColumnName = "student_id") }
+            )
+    private List<Student> studentList;
 
     public Course() {
+    }
+
+    public Course(int crn, String subjectCode, String name, String detail, int numOfCredits, Collection<Class> classes, Collection<Department> departments) {
+        this.crn = crn;
+        this.subjectCode = subjectCode;
+        this.name = name;
+        this.detail = detail;
+        this.numOfCredits = numOfCredits;
+        this.classes = classes;
+        this.departments = departments;
     }
 
     public long getId() {
@@ -87,11 +107,4 @@ public class Course {
         this.classes = classes;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
 }

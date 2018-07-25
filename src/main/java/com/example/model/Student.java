@@ -1,6 +1,8 @@
 package com.example.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -9,21 +11,33 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "student_id")
     private  long id;
     private int number;
     private String name;
 //    private String major;
     private String yearOfEntry;
 
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(joinColumns = @JoinColumn(name="student_id"),
+//            inverseJoinColumns = @JoinColumn(name="class_id"))
+//    private Collection<Class> classes;
+
+    @OneToMany
+    @JoinTable
+            (
+                    name = "StudentCourse",
+                    joinColumns = { @JoinColumn(name="student_id", referencedColumnName = "student_id") },
+                    inverseJoinColumns = { @JoinColumn(name="course_id", referencedColumnName = "course_id", unique = true) }
+            )
+    private List<Course> courseList;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "class_id")
-    private Class classObject;
+    @JoinColumn(name = "depart_id")
+    private Department department;
 
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "major_id")
-    private Major major;
-
+    @OneToMany(mappedBy="student")
+    private Collection<Grade> grades;
 
     public Student() {
     }

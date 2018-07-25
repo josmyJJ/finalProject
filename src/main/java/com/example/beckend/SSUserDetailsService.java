@@ -18,17 +18,17 @@ import java.util.Set;
 @Service
 public class SSUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private UserRepository UserRepository;
 
-    public SSUserDetailsService(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public SSUserDetailsService(UserRepository UserRepository){
+        this.UserRepository = UserRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username)throws UsernameNotFoundException {
 
         try{
-            User user = userRepository.findByUsername(username);
+            User user = UserRepository.findByUsername(username);
             if(user == null){
                 return null;
             }
