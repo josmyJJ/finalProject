@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+
+    <!--View all classes in a course-->
+    <div sec:authorize="isAuthenticated()">
+        <strong>View all classes in a course </strong>
+        <form action="#"
+              th:action="@{/classesByCourse}"
+              method="post">
+            <div class="form-group">
+                <label for="course_name">Course name</label>
+                <input type="text" id="course_name" name="course_name"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!--View all classrooms for a course-->
+    <div sec:authorize="isAuthenticated()">
+        <strong>View all classrooms for a course </strong>
+        <form action="#"
+              th:action="@{/classroomsByCourse}"
+              method="post">
+            <div class="form-group">
+                <label for="courseName">Course name</label>
+                <input type="text" id="courseName" name="courseName"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <!--NEEDS FIXING!!!!-->
+    <!--&lt;!&ndash;View all classrooms in a department&ndash;&gt;-->
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<strong>View all classrooms in a department</strong>-->
+        <!--<form action="#"-->
+              <!--th:action="@{/coursesByDepartment}"-->
+              <!--method="post">-->
+            <!--<div class="form-group">-->
+                <!--<label for="department_name">Department name</label>-->
+                <!--<input type="text" id="department_name" name="department_name"/>-->
+                <!--<button type="submit" class="btn btn-primary">Search</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
+
+    <!--View all majors in a department-->
+    <div sec:authorize="isAuthenticated()">
+        <strong>View all majors in a department </strong>
+        <form action="#"
+              th:action="@{/majorsByDepartment}"
+              method="post">
+            <div class="form-group">
+                <label for="departmentName">Department name</label>
+                <input type="text" id="departmentName" name="departmentName"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>
+<div class="emptySpace"></div>
+
+<footer th:replace="base :: footer"></footer>
+<br/>
+
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>
+
+
+

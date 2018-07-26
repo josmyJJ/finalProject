@@ -8,6 +8,37 @@ import java.util.Set;
 @Entity
 @Table(name="Instructor")
 public class Instructor {
+    public Collection<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Collection<Student> students) {
+        this.students = students;
+    }
+
+    public Collection<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Collection<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public Collection<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Collection<Class> classes) {
+        this.classes = classes;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -17,6 +48,9 @@ public class Instructor {
     private String name;
 //    private String department;
     private int officeNumber;
+
+    @OneToMany(mappedBy="instructor")
+    private Collection<Student> students;
 
     @OneToMany(mappedBy="instructor")
     private Collection<Grade> grades;

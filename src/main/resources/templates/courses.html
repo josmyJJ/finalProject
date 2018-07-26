@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th>Department</th>
+                <th>Course Number</th>
+                <th>Course Name</th>
+                <th>Credits</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td ><span th:text="${course.major.department.departmentName}"></span></td>
+                <td ><span th:text="${course.courseNumber}"></span></td>
+                <td ><span th:text="${course.courseName}"></span></td>
+                <td ><span th:text="${course.credits}"></span></td>
+                <td >
+                    <a class="btn btn-primary" th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<div class="emptySpace"></div>
+
+<footer th:replace="base :: footer"></footer>
+<br/>
+
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>

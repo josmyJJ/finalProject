@@ -9,6 +9,23 @@ import java.util.List;
 @Table(name="Student")
 public class Student {
 
+    public List<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Class> classes) {
+        this.classes = classes;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "student_id")
@@ -18,16 +35,23 @@ public class Student {
 //    private String major;
     private String yearOfEntry;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(joinColumns = @JoinColumn(name="student_id"),
-//            inverseJoinColumns = @JoinColumn(name="class_id"))
-//    private Collection<Class> classes;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "major_id")
     private Major major;
 
+
+    @ManyToMany
+    @JoinTable
+            (
+                    name = "student_class",
+                    joinColumns = { @JoinColumn(name="student_id", referencedColumnName = "student_id") },
+                    inverseJoinColumns = { @JoinColumn(name="class_id", referencedColumnName = "class_id") }
+            )
+    private List<Class> classes;
 
     @OneToMany
     @JoinTable

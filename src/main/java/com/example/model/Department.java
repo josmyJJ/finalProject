@@ -18,6 +18,10 @@ public class Department {
     private Collection<Student> students;
 
     @OneToMany(mappedBy = "department")
+    private Collection<Class> classes;
+
+
+    @OneToMany(mappedBy = "department")
     private Collection<Instructor> instructors;
 
     @OneToMany(mappedBy = "department")
@@ -25,6 +29,25 @@ public class Department {
 
     @OneToMany(mappedBy="department")
     private Collection<Major> majors;
+
+    public Collection<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Collection<Class> classes) {
+        this.classes = classes;
+    }
+
+    public Collection<Classroom> getClassrooms() {
+        return classrooms;
+    }
+
+    public void setClassrooms(Collection<Classroom> classrooms) {
+        this.classrooms = classrooms;
+    }
+
+    @OneToMany(mappedBy="department")
+    private Collection<Classroom> classrooms;
 
 
 //    @ManyToMany(fetch = FetchType.EAGER)

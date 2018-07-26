@@ -38,6 +38,24 @@ public class Course {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Collection<Classroom> getClassrooms() {
+        return classrooms;
+    }
+
+    public void setClassrooms(Collection<Classroom> classrooms) {
+        this.classrooms = classrooms;
+    }
+
+    @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+    private Collection<Classroom> classrooms;
 
     @OneToMany
     @JoinTable

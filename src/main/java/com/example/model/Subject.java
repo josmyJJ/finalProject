@@ -11,10 +11,19 @@ public class Subject {
 
     private String subjectName;
 
+    public Set<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Set<Class> classes) {
+        this.classes = classes;
+    }
+
     @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     public Set<Course> courses;
 
-
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public Set<Class> classes;
 
     public long getId() {
         return id;
