@@ -14,8 +14,29 @@
 
     <h2>Courses</h2>
     <div th:each="course : ${courses}">
-        <span th:inline="text">[[${course.name}]]</span> &nbsp;
+        <span th:inline="text">[[${course.name}]]</span> <br/>
+
+        <span sec:authorize="hasAuthority('ADMIN')">
+            <span>
+                <a  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a> &nbsp; - &nbsp;
+            </span>
+            <span>
+                <a th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a> &nbsp;
+            </span>
+        </span> <br>
+
     </div>
+
+    <span sec:authorize="hasAuthority('STUDENT')">
+
+        <h3>ONLY STUDENTS CAN SEE THIS</h3>
+
+            <p>View classes in current semester</p>
+            <p>View classes in subject in current semester</p>
+            <p>View classes by an instructor in current semester</p>
+            <p>View classes by a certain time in current semester</p>
+            <p>View classes in a department</p>
+        </span>
 
     <div class="emptySpace"></div>
 </div>

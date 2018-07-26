@@ -7,23 +7,18 @@
 <body>
 <div th:replace="base :: nav"></div>
 
+<div class="space"></div>
+
 <div class="container bg-light pl-5 pr-5">
     <div class="space"></div>
 
-    <h2>Student Page</h2>
-
-
-    <hr/>
-    <div class="space"></div>
-    <button><a href="/class">Class Details </a> </button><br/>
-    <button><a href="/coursedetail">Course page </a> </button><br/>
-    <button><a href="#">Department page </a> </button><br/>
-    <button><a href="#">Instructor page </a> </button><br/>
-    <button><a href="#">Subject page </a> </button><br/>
+    <h2>Courses</h2>
+    <div th:each="major : ${majors}">
+        <span th:inline="text">[[${major.name}]]</span> &nbsp;
+    </div>
 
     <div class="emptySpace"></div>
 </div>
 <div class="emptySpace"></div>
-
 </body>
 </html>

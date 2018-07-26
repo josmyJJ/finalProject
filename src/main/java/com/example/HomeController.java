@@ -158,7 +158,7 @@ public class HomeController {
     public String processMajor(@ModelAttribute("major") Major major){
         majorRepository.save(major);
         //return "index";
-        return "redirect:/";
+        return "majordetails";
     }
 
 
@@ -197,6 +197,20 @@ public class HomeController {
         return "coursedetails";
     }
 
+    @RequestMapping("/updateCourse/{id}")
+    public String updateCourse(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("course", courseRepository.findById(id));
+        model.addAttribute("majors", majorRepository.findAll());
+//        model.addAttribute("subjects", subjectRepository.findAll());
+        return "addcourse";
+    }
+
+    @RequestMapping("/deleteCourse/{id}")
+    public String deleteCourse(@PathVariable("id")long id){
+        courseRepository.deleteById(id);
+        return "course";
+    }
 
 
 // ********************* CODE FOR CLASSROOM **************************
@@ -216,11 +230,11 @@ public class HomeController {
 
 // ********************* CODE FOR CLASS ****************************
 
-    @RequestMapping("/classes/{id}")
-    public String classesofDepartments(@PathVariable("id") long id, Model model){
-        model.addAttribute("department", departmentRepository.findById(id));
+    @RequestMapping("/class")
+    public String classPage(Model model){
         return "classpage";
     }
+
     @GetMapping("/addclass")
     public String addclass(Model model){
         model.addAttribute("aclass", new Class());

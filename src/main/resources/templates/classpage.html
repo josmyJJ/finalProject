@@ -8,23 +8,18 @@
 <div th:replace="base :: nav"></div>
 
 <div class="container bg-light pl-5 pr-5">
+        <div class="space"></div>
+
+        <h2>Class Details</h2>
+        <hr/>
+
+    <ul>
+        <li>Current Schedule</li>
+        <p>When user click this link it will show list of classes. - drop</p>
+        <li>Enroll</li>
 
 
-    <div sec:authorize="isAuthenticated()" class="text-center">
-        <th:block th:each="class:${department.classes}">
-            <table>
-                <tr><td><h3 th:text="${class.name}"></h3></td></tr>
-                <tr>
-                    <td><h3 th:text="${class.crnNumber}"></h3></td>
-                    <td><h3 th:text="${class.time}"></h3></td>
-                    <td><h3 th:text="${class.instructor}"></h3></td>
-                    <td><h3 th:text="${class.classroom}"></h3></td>
-                    <td></td>
-
-                </tr>
-            </table>
-        </th:block>
-    </div>
+    </ul>
 
 
 </div>
