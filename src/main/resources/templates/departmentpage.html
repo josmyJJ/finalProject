@@ -19,10 +19,11 @@
 
             <h5 th:text="${department.name}"></h5>
             <th:block>
+                <li><a href="/coursedetail">List all departments</h3></a></li>
                 <li><a href="/adddepartment">Add a department</a></li>
-                <li><a th:href="@{/majors/{id}(id=${department.id})}">List all majors</h3></a></li>
-                <li><a th:href="@{/courses/{id}(id=${department.id})}">List all courses</h3></a></li>
-                <li><a th:href="@{/classes/{id}(id=${department.id})}">List all classes</h3></a></li>
+                <li><a href="#">Majors in Department</h3></a></li>
+                <li><a href="#">Classes in Department</h3></a></li>
+                <li><a href="#">Courses in Departmen</h3></a></li>
             </th:block>
         </div>
         <div class="emptySpace"></div>

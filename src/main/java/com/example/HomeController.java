@@ -138,6 +138,7 @@ public class HomeController {
         return "redirect:/";
     }
 
+
 // ******************* CODE FOR MAJOR ********************************
 
     @RequestMapping("/major")

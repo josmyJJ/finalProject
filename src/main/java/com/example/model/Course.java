@@ -34,6 +34,11 @@ public class Course {
     @JoinColumn(name = "major_id")
     private Major major;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+
     @OneToMany
     @JoinTable
             (
