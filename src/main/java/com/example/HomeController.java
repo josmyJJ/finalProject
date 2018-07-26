@@ -168,6 +168,14 @@ public class HomeController {
         return "majordetails";
     }
 
+    @RequestMapping("/updateMajor/{id}")
+    public String updateMajor(@PathVariable("id") long id, Model model)
+    {
+        model.addAttribute("major", majorRepository.findById(id));
+        model.addAttribute("departments", departmentRepository.findAll());
+        return "majorform";
+    }
+
 
 // ************************** COURSE ******************************
 
