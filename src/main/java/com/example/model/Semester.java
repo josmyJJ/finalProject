@@ -12,11 +12,14 @@ public class Semester {
     @Column(name = "smester_id")
     private  long id;
 
+    private String name;
+
     @OneToMany(mappedBy="semester")
     private Collection<Class> classes;
 
     @OneToMany(mappedBy="semester")
     private Collection<Grade> grades;
+
 
     public Semester() {
     }
@@ -29,6 +32,22 @@ public class Semester {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Collection<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Collection<Grade> grades) {
+        this.grades = grades;
+    }
+
     public Collection<Class> getClasses() {
         return classes;
     }
@@ -36,4 +55,6 @@ public class Semester {
     public void setClasses(Collection<Class> classes) {
         this.classes = classes;
     }
+
+
 }

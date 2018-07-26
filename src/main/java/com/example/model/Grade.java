@@ -12,6 +12,8 @@ public class Grade {
     @Column(name = "grade_id")
     private  long id;
 
+    private String grade;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "semester_id")
     private Semester semester;
@@ -34,6 +36,14 @@ public class Grade {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public Semester getSemester() {
