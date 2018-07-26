@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Home</title>
     <th:block th:insert="base :: header"></th:block>
@@ -7,18 +7,24 @@
 <body>
 <div th:replace="base :: nav"></div>
 
-<h3> Add department</h3>
+<div class="container bg-light pl-5 pr-5">
 
-<form action="#" th:action="@{/processdepartment}" th:object="${department}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+    <div class="emptySpace"></div>
 
-    DepartmentName : <input type="text" th:field="*{name}" /> <br>
+    <h2>Add Department</h2>
+    <div class="space"></div>
 
-    <input type="submit" value="Submit" />
-</form>
+    <form action="#" th:action="@{/processdepartment}" th:object="${department}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
+        Department Name : <input type="text" th:field="*{name}"/> <br>
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <div class="emptySpace"></div>
 </div>
-<div class="emptySpace"></div>
+
 
 </body>
 </html>

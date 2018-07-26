@@ -14,7 +14,7 @@
 
     <div class="row text-center pl-5">
         <form action="#"
-              th:action="@{/process}"
+              th:action="@{/addCourse}"
               th:object="${course}"
               method="post">
 
@@ -23,6 +23,28 @@
             <input type="hidden" th:value="${user_id}" name="user_id">
 
             <div class="form-group row">
+
+                <label class="col-sm-2 col-form-label">Department</label>
+                <div class="col-sm-10">
+                    <select th:field="*{department}" class="form-control input-md">
+                    <table>
+                        <tr th:each="aDep: ${departmentList}">
+                            <option th:value="${aDep.id}">[[${aDep.name}]]</option>
+                        </tr>
+                    </table>
+                    </select>
+                </div>
+
+                <label class="col-sm-2 col-form-label">Major</label>
+                <div class="col-sm-10">
+                    <select th:field="*{major}" class="form-control input-md">
+                        <table>
+                            <tr th:each="aMaj: ${majorList}">
+                                <option th:value="${aMaj.id}">[[${aMaj.name}]]</option>
+                            </tr>
+                        </table>
+                    </select>
+                </div>
 
                 <label for="subjectCode" class="col-sm-2 col-form-label">Subject Code</label>
                 <div class="col-sm-10">
@@ -43,10 +65,13 @@
                 <div class="col-sm-10">
                     <textarea class="form-control" id="courseDetail" rows="1" th:field="*{detail}"></textarea>
                 </div>
+
+                <label for="courseCredits" class="col-sm-2 col-form-label">Credits</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="courseCredits" rows="1" th:field="*{numOfCredits}"></textarea>
+                </div>
+
             </div>
-
-
-
 
             <input class="submit-btn" type="submit" value="Submit"/>
             <div class="space"></div>

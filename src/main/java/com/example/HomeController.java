@@ -60,6 +60,9 @@ public class HomeController {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    MajorRepository majorRepository;
+
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("departments", departmentRepository.findAll());
@@ -78,106 +81,18 @@ public class HomeController {
         return "admin";
     }
 
-    @RequestMapping("/student")
-    public String student(){
-        return "student";
-    }
-
-    @RequestMapping("/advisor")
-    public String advisor(){
-        return "advisor";
-    }
-
     @RequestMapping("/instructor")
     public String instructor(){
         return "instructor";
     }
 
-    @RequestMapping("/course")
-    public String course(){
-        return "course";
-    }
 
-    @RequestMapping("/secure")
-    public String secure(){
-        return "secure";
-    }
-
-
-
-    @GetMapping("/add")
-    public String addcourse(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentusername = authentication.getName();
-        User user = UserService.findByUsername(currentusername);
-        model.addAttribute("user_id",user.getId());
-        model.addAttribute("course", new Course());
-        return "addcourse";
-    }
+// ************** CODE FOR REGISTRATION **********************
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
         model.addAttribute("user", new User());
         return "registration";
-    }
-
-    @RequestMapping("/listdepartment")
-    public String listdepartment(Model model){
-        model.addAttribute("departments", departmentRepository.findAll());
-        return "departmentpage";
-    }
-
-    @RequestMapping("/classes/{id}")
-    public String classesofDepartments(@PathVariable("id") long id, Model model){
-        model.addAttribute("department", departmentRepository.findById(id));
-        return "classpage";
-    }
-
-
-    // DEPARTMENT
-    @GetMapping("/adddepartment")
-    public String adddepartment(Model model){
-        model.addAttribute("department", new Department());
-        return "adddepartment";
-    }
-
-    @PostMapping("/processdepartment")
-    public String processdepartment(@ModelAttribute("department") Department department){
-        departmentRepository.save(department);
-        //return "index";
-        return "redirect:/";
-    }
-
-
-    // ADD CLASSROOM
-    @GetMapping("/addclassroom")
-    public String addclassroom(Model model){
-        model.addAttribute("classroom", new Classroom());
-        return "addclassroom";
-    }
-
-    @PostMapping("/processclassroom")
-    public String processclassroom(@ModelAttribute("classroom") Classroom classroom, Model model){
-        classroomRepository.save(classroom);
-
-        //model.addAttribute("classroom", classroomRepository.findAll());
-        //return "index";
-        return "redirect:/";
-    }
-
-
-    //add class
-    @GetMapping("/addclass")
-    public String addclass(Model model){
-        model.addAttribute("aclass", new Class());
-        return "addclass";
-    }
-
-    @PostMapping("/processclass")
-    public String processclass(@ModelAttribute("aclass") Class aclass){
-        classRepository.save(aclass);
-        //return "index";
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -195,6 +110,153 @@ public class HomeController {
         return "index";
     }
 
+    protected User getUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentusername = authentication.getName();
+        User user = UserService.findByUsername(currentusername);
+        return user;
+    }
+
+// ******************* CODE FOR DEPARTMENT ********************************
+
+    @RequestMapping("/dpartment")
+    public String listdepartment(Model model){
+        model.addAttribute("departments", departmentRepository.findAll());
+        return "departmentpage";
+    }
+
+    @GetMapping("/adddepartment")
+    public String adddepartment(Model model){
+        model.addAttribute("department", new Department());
+        return "adddepartment";
+    }
+
+    @PostMapping("/processdepartment")
+    public String processdepartment(@ModelAttribute("department") Department department){
+        departmentRepository.save(department);
+        //return "index";
+        return "redirect:/";
+    }
+
+// ******************* CODE FOR MAJOR ********************************
+
+    @RequestMapping("/major")
+    public String listdeMajor(Model model){
+        model.addAttribute("majors", majorRepository.findAll());
+        return "major";
+    }
+
+    @GetMapping("/addMajor")
+//    @RequestMapping(value = "/addMajor", method = RequestMethod.GET)
+    public String addMajor(Model model){
+        model.addAttribute("departmentList", departmentRepository.findAll());
+        model.addAttribute("major", new Major());
+        return "addmajor";
+    }
+
+    @PostMapping("/processMajor")
+    public String processMajor(@ModelAttribute("major") Major major){
+        majorRepository.save(major);
+        //return "index";
+        return "redirect:/";
+    }
+
+
+// ******************* CODE FOR COURSE ******************************
+
+    @RequestMapping("/course")
+    public String course(){
+        return "course";
+    }
+
+    @GetMapping("/add")
+    public String addcourse(Model model) {
+        model.addAttribute("course", new Course());
+        model.addAttribute("departmentList", departmentRepository.findAll());
+        model.addAttribute("majorList", majorRepository.findAll());
+        return "addcourse";
+    }
+
+    @PostMapping("/addCourse")
+    public String processCourse(@Valid @ModelAttribute Course course, BindingResult result) {
+        if(result.hasErrors()) {
+            return "addcourse";
+        }
+        courseRepository.save(course);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/coursedetail")
+    public String courseDetail(Model model){
+        model.addAttribute("courses", courseService.getAllCourse());
+        List<Course> course = courseService.getAllCourse();
+        for (Iterator<Course> c = course.iterator(); c.hasNext();) {
+            Course item = c.next();
+            System.out.println(item.getName());
+        }
+        return "coursedetails";
+    }
+
+
+
+// ********************* CODE FOR CLASSROOM **************************
+
+    @GetMapping("/addclassroom")
+    public String addclassroom(Model model){
+        model.addAttribute("classroom", new Classroom());
+        return "addclassroom";
+    }
+
+    @PostMapping("/processclassroom")
+    public String processclassroom(@ModelAttribute("classroom") Classroom classroom, Model model){
+        classroomRepository.save(classroom);
+        return "redirect:/";
+    }
+
+
+// ********************* CODE FOR CLASS ****************************
+
+    @RequestMapping("/classes/{id}")
+    public String classesofDepartments(@PathVariable("id") long id, Model model){
+        model.addAttribute("department", departmentRepository.findById(id));
+        return "classpage";
+    }
+    @GetMapping("/addclass")
+    public String addclass(Model model){
+        model.addAttribute("aclass", new Class());
+        return "addclass";
+    }
+
+    @PostMapping("/processclass")
+    public String processclass(@ModelAttribute("aclass") Class aclass){
+        classRepository.save(aclass);
+        //return "index";
+        return "redirect:/";
+    }
+
+    @RequestMapping("/enroll/{id}")
+    public String enroll(@PathVariable("id") long id, Model model){
+        //model.addAttribute("class", classRepository.findById(id).get());
+        model.addAttribute("class", classRepository.findById(id));
+        //return "classpage";
+        return "index";
+    }
+
+    @RequestMapping("/drop/{id}")
+    public String drop(@PathVariable("id") long id, Model model){
+        classRepository.deleteById(id);
+        model.addAttribute(classRepository.findAll());
+        return "redirect:/";
+    }
+
+
+// ******************* CODE FOR STUDENT ***********************
+
+    @RequestMapping("/student")
+    public String student(){
+        return "student";
+    }
+
     @RequestMapping("/schedule")
     public String studentSchedule(Model model){
         model.addAttribute("students", studentService.getAllStudents());
@@ -206,62 +268,6 @@ public class HomeController {
         return "studentschedule";
     }
 
-
-    // ADVISOR STUFF
-    // CHANGES I'VE MADE
-    @RequestMapping("/advisorPage")
-    public String advisorPage(Model model){
-        model.addAttribute("students", studentService.getAllStudents());
-        model.addAttribute("courses", courseService.getAllCourse());
-
-
-        List<Student> students = studentService.getAllStudents();
-        for (Iterator<Student> s = students.iterator(); s.hasNext();) {
-            Student item = s.next();
-            System.out.println(item.getName());
-        }
-        List<Course> course = courseService.getAllCourse();
-        for (Iterator<Course> c = course.iterator(); c.hasNext();) {
-            Course item = c.next();
-            System.out.println(item.getName());
-        }
-        return "studentdetails";
-    }
-
-
-    protected User getUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentusername = authentication.getName();
-        User user = UserService.findByUsername(currentusername);
-        return user;
-    }
-
-    //enroll class
-    @RequestMapping("/enroll/{id}")
-    public String enroll(@PathVariable("id") long id, Model model){
-        //model.addAttribute("class", classRepository.findById(id).get());
-        model.addAttribute("class", classRepository.findById(id));
-        //return "classpage";
-        return "index";
-    }
-    //drop class
-    @RequestMapping("/drop/{id}")
-    public String drop(@PathVariable("id") long id, Model model){
-        classRepository.deleteById(id);
-        model.addAttribute(classRepository.findAll());
-//        return "index";
-        return "redirect:/";
-    }
-
-    //student schedule
-//    @RequestMapping("/studentschedule")
-//    public String stdentschedule(Model model){
-//
-//        model.addAttribute(classroomRepository.findAll());
-//        return "studentschedule";
-//    }
-
-    //@RequestMapping("/viewclass")
     @RequestMapping("/studentschedule")
     public String viewClass(Model model) {
         model.addAttribute("classes", classRepository.findAll());
@@ -270,4 +276,26 @@ public class HomeController {
         return "studentschedule";
     }
 
+
+// ******************* CODE FOR ADVISOR ***********************
+
+    @RequestMapping("/advisor")
+    public String advisor(){
+        return "advisor";
+    }
+
+    @RequestMapping("/advisorPage")
+    public String advisorPage(Model model){
+        model.addAttribute("students", studentService.getAllStudents());
+
+        List<Student> students = studentService.getAllStudents();
+        for (Iterator<Student> s = students.iterator(); s.hasNext();) {
+            Student item = s.next();
+            System.out.println(item.getName());
+        }
+        return "studentdetails";
+    }
+
+
+// ******************* CODE FOR ADVISOR ***********************
 }

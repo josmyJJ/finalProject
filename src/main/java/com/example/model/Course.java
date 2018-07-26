@@ -34,9 +34,6 @@ public class Course {
     @JoinColumn(name = "major_id")
     private Major major;
 
-
-
-
     @OneToMany
     @JoinTable
             (
@@ -48,7 +45,6 @@ public class Course {
 
     public Course() {
     }
-
 
     public Course(int crn, String subjectCode, String name, String detail, int numOfCredits, Collection<Class> classes, Collection<Department> departments) {
         this.crn = crn;

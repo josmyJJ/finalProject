@@ -9,17 +9,23 @@
 
 <div class="container bg-light pl-5 pr-5">
 
+    <div class="emptySpace"></div>
 
+    <h2>Department Page</h2>
+    <div class="space"></div>
 
-    <div sec:authorize="isAuthenticated()" class="text-center">
+    <div sec:authorize="isAuthenticated()">
         <div th:each="department:${departments}">
-            <li><h3 th:text="${department.name}"></h3></li>
+
+            <h5 th:text="${department.name}"></h5>
             <th:block>
+                <li><a href="/adddepartment">Add a department</a></li>
                 <li><a th:href="@{/majors/{id}(id=${department.id})}">List all majors</h3></a></li>
                 <li><a th:href="@{/courses/{id}(id=${department.id})}">List all courses</h3></a></li>
                 <li><a th:href="@{/classes/{id}(id=${department.id})}">List all classes</h3></a></li>
             </th:block>
         </div>
+        <div class="emptySpace"></div>
     </div>
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <title>Home</title>
     <th:block th:insert="base :: header"></th:block>
@@ -9,36 +9,36 @@
 
 <div class="container bg-light pl-5 pr-5">
 
+    <div class="emptySpace"></div>
 
-    Add Major
+    <h2>Add Major</h2>
+    <div class="space"></div>
 
-    <form action="#" th:action="@{/processmajor}" th:object="${major}" method="post">
+    <form action="#" th:action="@{/processMajor}" th:object="${major}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
-        Major name : <input type="text" th:field="*{name}" />
-
-        <div class="form-group">
-            <label for="departmentInput">Department</label>
-            <select class="form-control" id="departmentInput" th:field="*{department_id}">
-                <option th:each="aDepartment : ${departments}" th:value="${aDepartment.id}"
-                        th:text="${aDepartment.name}"></option>
+        <label class="col-sm-2 col-form-label">Department</label>
+        <div class="col-sm-10">
+            <select th:field="*{department}" class="form-control input-md">
+                <table>
+                    <tr th:each="aDep: ${departmentList}">
+                        <option th:value="${aDep.id}">[[${aDep.name}]]</option>
+                    </tr>
+                </table>
             </select>
         </div>
 
-        <input type="submit" value="Submit">
+        <label for="majorName" class="col-sm-2 col-form-label">Major Name</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" id="majorName" rows="1" th:field="*{name}"></textarea>
+        </div>
 
+        <input type="submit" value="Submit"/>
     </form>
 
-
-
-
+    <div class="emptySpace"></div>
 </div>
-<div class="emptySpace"></div>
 
-<footer th:replace="base :: footer"></footer>
-<br/>
 
-<div class="space"></div>
-<div th:replace="base :: scripts"></div>
 </body>
 </html>

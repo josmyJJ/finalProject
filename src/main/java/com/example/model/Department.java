@@ -20,14 +20,11 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private Collection<Instructor> instructors;
 
-
     @OneToMany(mappedBy = "department")
     private Collection<Course> courses;
 
     @OneToMany(mappedBy="department")
     private Collection<Major> majors;
-
-
 
 
 //    @ManyToMany(fetch = FetchType.EAGER)
