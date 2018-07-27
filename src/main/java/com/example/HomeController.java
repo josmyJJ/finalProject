@@ -53,9 +53,6 @@ public class HomeController {
     InstructorRepository instructorRepository;
 
     @Autowired
-    SemesterRepository semesterRepository;
-
-    @Autowired
     UserRepository userRepository;
 
     @Autowired
@@ -248,30 +245,30 @@ public class HomeController {
         return "course/coursedetails";
     }
 
-    @PostMapping("/coursesByDepartment")
-    public String getCoursesByDepartment(Model model, @RequestParam("department2") String department_name){
-        Department department = departmentRepository.findByDepartmentName(department_name);
-        ArrayList<Major> majors = majorRepository.findAllByDepartment(department);
-        ArrayList<Course> courses = new ArrayList<>();
-        ArrayList<Course> courseList = new ArrayList<>();
-
-        Iterator<Major> majorIterator = majors.iterator();
-
-        while (majorIterator.hasNext()) {
-            Major major = majorIterator.next();
-            courses = courseRepository.findAllByMajor(major);
-            Iterator<Course> courseIterator = courses.iterator();
-
-            while (courseIterator.hasNext()) {
-                Course course = courseIterator.next();
-                courseList.add(course);
-                courseIterator.remove();
-            }
-            majorIterator.remove();
-        }
-        model.addAttribute("courses",courseList);
-        return "courses";
-    }
+//    @PostMapping("/coursesByDepartment")
+//    public String getCoursesByDepartment(Model model, @RequestParam("department2") String department_name){
+//        Department department = departmentRepository.findByDepartmentName(department_name);
+//        ArrayList<Major> majors = majorRepository.findAllByDepartment(department);
+//        ArrayList<Course> courses = new ArrayList<>();
+//        ArrayList<Course> courseList = new ArrayList<>();
+//
+//        Iterator<Major> majorIterator = majors.iterator();
+//
+//        while (majorIterator.hasNext()) {
+//            Major major = majorIterator.next();
+//            courses = courseRepository.findAllByMajor(major);
+//            Iterator<Course> courseIterator = courses.iterator();
+//
+//            while (courseIterator.hasNext()) {
+//                Course course = courseIterator.next();
+//                courseList.add(course);
+//                courseIterator.remove();
+//            }
+//            majorIterator.remove();
+//        }
+//        model.addAttribute("courses",courseList);
+//        return "courses";
+//    }
 
     @RequestMapping("/updateCourse/{id}")
     public String updateCourse(@PathVariable("id") long id, Model model)
@@ -352,6 +349,12 @@ public class HomeController {
         return "class/classpage";
     }
 
+    @RequestMapping("/listClass")
+    public String viewAllClasses(Model model) {
+        model.addAttribute("classes", classRepository.findAll());
+        return "class/allclasses";
+    }
+
     @RequestMapping("/enroll/{id}")
     public String enroll(@PathVariable("id") long id, Model model){
         //model.addAttribute("class", classRepository.findById(id).get());
@@ -422,6 +425,17 @@ public class HomeController {
         return "instructor";
     }
 
+    @GetMapping("/addinstructor")
+    public String addinstructor(Model model){
+        model.addAttribute("instructor", new Instructor());
+        return "addinstructor";
+    }
+
+    @PostMapping("/processinstructor")
+    public String processinstructor(@ModelAttribute("instructor") Instructor instructor, Model model){
+        instructorRepository.save(instructor);
+        return "redirect:/";
+    }
 
 
     //*************************Queries**************************
@@ -434,7 +448,7 @@ public class HomeController {
     @RequestMapping("/classesInCurrentSemester")
     public String classesInCurrentSemester(Model model) {
         model.addAttribute("classes", classRepository.findAllBySemester("current"));
-        return "index";
+        return "classes";
     }
 
 //    @PostMapping("/classesByInstructor")
@@ -465,7 +479,7 @@ public class HomeController {
     public String getClassesByCourse(Model model, @RequestParam("course_name") String course_name) {
         Course course = courseRepository.findByName(course_name);
         model.addAttribute("classes", classRepository.findAllByCourse(course));
-        return "index";
+        return "classes";
     }
 
     @PostMapping("/classesBySubjectInCurrentSemester")
@@ -481,7 +495,7 @@ public class HomeController {
     public String classroomsByCourse(Model model, @RequestParam("courseName") String courseName) {
         Course course = courseRepository.findByName(courseName);
         model.addAttribute("classrooms", classroomRepository.findAllByCourses(course));
-        return "index";
+        return "classroom/allclassrooms";
     }
 
 //    @PostMapping("/classroomsByInstructor")
@@ -500,18 +514,18 @@ public class HomeController {
 //        return "classrooms";
 //    }
 
-//    @PostMapping("/coursesByDepartment")
-//    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
-//        Department department = departmentRepository.findByDepartmentName(department_name);
-//        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
-//        return "index";
-//    }
-//
-//    @PostMapping("/majorsByDepartment")
-//    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
-//        Department department = departmentRepository.findByDepartmentName(departmentName);
-//        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
-//        return "index";
-//    }
+    @PostMapping("/coursesByDepartment")
+    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
+        Department department = departmentRepository.findByDepartmentName(department_name);
+        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
+        return "courses";
+    }
+
+    @PostMapping("/majorsByDepartment")
+    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
+        Department department = departmentRepository.findByDepartmentName(departmentName);
+        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
+        return "majors";
+    }
 
 }

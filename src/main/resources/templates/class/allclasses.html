@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+<div class="space"></div>
+    <h1>Classes</h1>
+    <div class="table-responsive">
+        <table class="table table-hover text-center">
+            <thead>
+            <tr>
+                <th class="text-center">CRN Number</th>
+                <th class="text-center">Time</th>
+                <th class="text-center">Course Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="class : ${classes}">
+                <td ><span th:text="${class.crnNumber}"></span></td>
+                <td ><span th:text="${class.time}"></span></td>
+                <td ><span th:text="${class.courseNumber}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div class="emptySpace"></div>
+<footer th:replace="base :: footer"></footer>
+<br/>
+
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>

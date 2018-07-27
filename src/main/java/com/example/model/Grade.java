@@ -15,10 +15,6 @@ public class Grade {
     private String grade;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "semester_id")
-    private Semester semester;
-
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student;
 
@@ -44,14 +40,6 @@ public class Grade {
 
     public void setGrade(String grade) {
         this.grade = grade;
-    }
-
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Semester semester) {
-        this.semester = semester;
     }
 
     public Student getStudent() {

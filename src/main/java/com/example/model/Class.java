@@ -12,9 +12,18 @@ public class Class {
     @Column(name = "class_id")
     private  long id;
 
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
     private String crnNumber;
 
     private String time;
+    private String semester;
 
     private int courseNumber;
 
@@ -28,22 +37,8 @@ public class Class {
 
     private String subjectCode;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "semester_id")
-    private Semester semester;
-
-
     @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
     private Collection<Student> students;
-
-
-    public Semester getSemester() {
-        return semester;
-    }
-
-    public void setSemester(Semester semester) {
-        this.semester = semester;
-    }
 
     public Department getDepartment() {
         return department;

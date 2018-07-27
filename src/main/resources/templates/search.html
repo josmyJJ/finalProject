@@ -15,6 +15,19 @@
 
     <!--View all classes in a course-->
     <div sec:authorize="isAuthenticated()">
+        <strong>View all classes in a semester </strong>
+        <form action="#"
+              th:action="@{/classesInCurrentSemester}"
+              method="post">
+            <div class="form-group">
+                <button type="submit" class="btn btn-info">Search</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!--View all classes in a course-->
+    <div sec:authorize="isAuthenticated()">
         <strong>View all classes in a course </strong>
         <form action="#"
               th:action="@{/classesByCourse}"
@@ -41,6 +54,20 @@
         </form>
     </div>
 
+    <!--View classesBySubjectInCurrentSemester-->
+    <div sec:authorize="isAuthenticated()">
+        <strong>View classes by subject in current semester</strong>
+        <form action="#"
+              th:action="@{/classesBySubjectInCurrentSemester}"
+              method="post">
+            <div class="form-group">
+                <label for="subject_name">Subject Name</label>
+                <input type="text" id="subject_name" name="subject_name"/>
+                <button type="submit" class="btn btn-info">Search</button>
+            </div>
+        </form>
+    </div>
+
     <!--View all courses in a department-->
     <div sec:authorize="isAuthenticated()">
         <strong>View all courses in a department</strong>
@@ -48,8 +75,8 @@
               th:action="@{/coursesByDepartment}"
               method="post">
             <div class="form-group">
-                <label for="department2">Department Name</label>
-                <input type="text" id="department2" name="department2"/>
+                <label for="department_name">Department Name</label>
+                <input type="text" id="department_name" name="department_name"/>
                 <button type="submit" class="btn btn-info">Search</button>
             </div>
         </form>
@@ -63,8 +90,8 @@
               th:action="@{/majorsByDepartment}"
               method="post">
             <div class="form-group">
-                <label for="department">Department Name</label>
-                <input type="text" id="department" name="department"/>
+                <label for="departmentName">Department Name</label>
+                <input type="text" id="departmentName" name="departmentName"/>
                 <button type="submit" class="btn btn-info">Search</button>
             </div>
         </form>
