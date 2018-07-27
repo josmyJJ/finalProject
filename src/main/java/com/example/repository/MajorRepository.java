@@ -7,5 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.ArrayList;
 
 public interface MajorRepository extends CrudRepository<Major, Long> {
+    // Majors in a department
     ArrayList<Major> findAllByDepartment(Department department);
 }

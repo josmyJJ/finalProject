@@ -176,22 +176,28 @@ public class HomeController {
     @RequestMapping("/major")
     public String listdeMajor(Model model){
         model.addAttribute("majors", majorRepository.findAll());
-        return "major";
+        return "major/major";
     }
 
     @GetMapping("/addMajor")
 //    @RequestMapping(value = "/addMajor", method = RequestMethod.GET)
     public String addMajor(Model model){
-        model.addAttribute("departmentList", departmentRepository.findAll());
         model.addAttribute("major", new Major());
-        return "addmajor";
+        model.addAttribute("departments", departmentRepository.findAll());
+        return "major/addmajor";
     }
 
     @PostMapping("/processMajor")
-    public String processMajor(@ModelAttribute("major") Major major){
+    public String processMajor(@ModelAttribute Major major){
         majorRepository.save(major);
         //return "index";
-        return "majordetails";
+        return "major/major";
+    }
+
+    @RequestMapping("/listMajor")
+    public String listMajors(Model model) {
+        model.addAttribute("majors", majorRepository.findAll());
+        return "major/majordetails";
     }
 
     @RequestMapping("/updateMajor/{id}")
@@ -199,7 +205,8 @@ public class HomeController {
     {
         model.addAttribute("major", majorRepository.findById(id));
         model.addAttribute("departments", departmentRepository.findAll());
-        return "majorform";
+        return "major/addmajor";
+
     }
 
 
