@@ -27,6 +27,36 @@ public class Class {
 
     private int courseNumber;
 
+
+    @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
+    private Collection<Student> students;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
+
+
+    public Class() {
+    }
+
+
     public Collection<Student> getStudents() {
         return students;
     }
@@ -36,9 +66,6 @@ public class Class {
     }
 
     private String subjectCode;
-
-    @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
-    private Collection<Student> students;
 
     public Department getDepartment() {
         return department;
@@ -56,10 +83,6 @@ public class Class {
         this.classroom = classroom;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "department_id")
-    private Department department;
-
     public Subject getSubject() {
         return subject;
     }
@@ -68,29 +91,8 @@ public class Class {
         this.subject = subject;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
-
 //    @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
 //    private Collection<Student> students;
-
-
-    public Class() {
-    }
 
     public String getTime() {
         return time;

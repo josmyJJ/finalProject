@@ -12,11 +12,17 @@
     <div class="jumbotron text-center">
         <h1>Harrison College</h1>
         <img class="image" th:src="@{/img/unipic.jpeg}" alt="college"/>
-        <p>A wonderful serenity has taken possession of my entire soul, like these
-            sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of
-            existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear
-            friend,
-            so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents</p>
+        <div class="space"></div>
+        <div class="space"></div>
+
+        <p>Harrison College is a small liberal-arts school in Harrison, Pennsylvania.
+            In its 80 year history, Harrison has tried many new fads and trends, and in
+            that same time period it has turned its back on just as many.</p>
+
+        <button sec:authorize="!isAuthenticated()"  type="button" class="btn btn-info"><a href="/login" class="text-white"> Access Harrison
+        </a></button>
+        <div class="emptySpace"></div>
+    </div>
     </div>
 
 

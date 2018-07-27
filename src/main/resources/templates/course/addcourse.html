@@ -29,7 +29,7 @@
                     <select th:field="*{department}" class="form-control input-md">
                     <table>
                         <tr th:each="aDep: ${departmentList}">
-                            <option th:value="${aDep.id}">[[${aDep.name}]]</option>
+                            <option th:value="${aDep.id}">[[${aDep.departmentName}]]</option>
                         </tr>
                     </table>
                     </select>
@@ -40,7 +40,7 @@
                     <select th:field="*{major}" class="form-control input-md">
                         <table>
                             <tr th:each="aMaj: ${majorList}">
-                                <option th:value="${aMaj.id}">[[${aMaj.name}]]</option>
+                                <option th:value="${aMaj.id}">[[${aDep.name}]]</option>
                             </tr>
                         </table>
                     </select>

@@ -28,18 +28,10 @@
     </div>
 
     <span sec:authorize="hasAuthority('STUDENT')">
-
-        <h3>ONLY STUDENTS CAN SEE THIS</h3>
-
-            <p>View classes in current semester</p>
-            <p>View classes in subject in current semester</p>
-            <p>View classes by an instructor in current semester</p>
-            <p>View classes by a certain time in current semester</p>
-            <p>View classes in a department</p>
-        </span>
-
+        <button class="btn btn-info"><a class="text-white" href="/search">View classes in a department</a></button>
+    </span>
     <div class="emptySpace"></div>
 </div>
-<div class="emptySpace"></div>
+
 </body>
 </html>

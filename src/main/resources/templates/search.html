@@ -14,59 +14,61 @@
     <hr/>
 
     <!--View all classes in a course-->
-    <div sec:authorize="isAuthenticated()">
-        <strong>View all classes in a semester </strong>
-        <form action="#"
-              th:action="@{/classesInCurrentSemester}"
-              method="post">
-            <div class="form-group">
-                <button type="submit" class="btn btn-info">Search</button>
-            </div>
-        </form>
-    </div>
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<strong>View all classes in a semester </strong>-->
+        <!--<form action="#"-->
+              <!--th:action="@{/classesInCurrentSemester}"-->
+              <!--method="post">-->
+            <!--<div class="form-group">-->
+                <!--<button type="submit" class="btn btn-info">Search</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
 
-
+<!--TODO -->
     <!--View all classes in a course-->
-    <div sec:authorize="isAuthenticated()">
-        <strong>View all classes in a course </strong>
-        <form action="#"
-              th:action="@{/classesByCourse}"
-              method="post">
-            <div class="form-group">
-                <label for="course_name">Course name</label>
-                <input type="text" id="course_name" name="course_name"/>
-                <button type="submit" class="btn btn-info">Search</button>
-            </div>
-        </form>
-    </div>
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<strong>View all classes in a course </strong>-->
+        <!--<form action="#"-->
+              <!--th:action="@{/classesByCourse}"-->
+              <!--method="post">-->
+            <!--<div class="form-group">-->
+                <!--<label for="course_name">Course name</label>-->
+                <!--<input type="text" id="course_name" name="course_name"/>-->
+                <!--<button type="submit" class="btn btn-info">Search</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
 
+    <!--TODO -->
     <!--View all classrooms for a course-->
-    <div sec:authorize="isAuthenticated()">
-        <strong>View all classrooms for a course </strong>
-        <form action="#"
-              th:action="@{/classroomsByCourse}"
-              method="post">
-            <div class="form-group">
-                <label for="courseName">Course name</label>
-                <input type="text" id="courseName" name="courseName"/>
-                <button type="submit" class="btn btn-info">Search</button>
-            </div>
-        </form>
-    </div>
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<strong>View all classrooms for a course </strong>-->
+        <!--<form action="#"-->
+              <!--th:action="@{/classroomsByCourse}"-->
+              <!--method="post">-->
+            <!--<div class="form-group">-->
+                <!--<label for="courseName">Course name</label>-->
+                <!--<input type="text" id="courseName" name="courseName"/>-->
+                <!--<button type="submit" class="btn btn-info">Search</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
 
+    <!--TODO -->
     <!--View classesBySubjectInCurrentSemester-->
-    <div sec:authorize="isAuthenticated()">
-        <strong>View classes by subject in current semester</strong>
-        <form action="#"
-              th:action="@{/classesBySubjectInCurrentSemester}"
-              method="post">
-            <div class="form-group">
-                <label for="subject_name">Subject Name</label>
-                <input type="text" id="subject_name" name="subject_name"/>
-                <button type="submit" class="btn btn-info">Search</button>
-            </div>
-        </form>
-    </div>
+    <!--<div sec:authorize="isAuthenticated()">-->
+        <!--<strong>View classes by subject in current semester</strong>-->
+        <!--<form action="#"-->
+              <!--th:action="@{/classesBySubjectInCurrentSemester}"-->
+              <!--method="post">-->
+            <!--<div class="form-group">-->
+                <!--<label for="subject_name">Subject Name</label>-->
+                <!--<input type="text" id="subject_name" name="subject_name"/>-->
+                <!--<button type="submit" class="btn btn-info">Search</button>-->
+            <!--</div>-->
+        <!--</form>-->
+    <!--</div>-->
 
     <!--View all courses in a department-->
     <div sec:authorize="isAuthenticated()">

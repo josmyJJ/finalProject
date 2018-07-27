@@ -42,6 +42,8 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Set<Class> classes;
 
+
+
     public Subject getSubject() {
         return subject;
     }

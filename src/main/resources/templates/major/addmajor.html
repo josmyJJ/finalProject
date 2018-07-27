@@ -21,8 +21,8 @@
         <div class="col-sm-10">
             <select th:field="*{department}" class="form-control input-md">
                 <table>
-                    <tr th:each="aDep: ${departmentList}">
-                        <option th:value="${aDep.id}">[[${aDep.name}]]</option>
+                    <tr th:each="aDep: ${departments}">
+                        <option th:value="${aDep.id}">[[${aDep.departmentName}]]</option>
                     </tr>
                 </table>
             </select>

@@ -193,6 +193,13 @@ public class HomeController {
         return "major/majordetails";
     }
 
+    @PostMapping("/majorsByDepartment")
+    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
+        Department department = departmentRepository.findByDepartmentName(departmentName);
+        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
+        return "majors";
+    }
+
     @RequestMapping("/updateMajor/{id}")
     public String updateMajor(@PathVariable("id") long id, Model model)
     {
@@ -226,7 +233,7 @@ public class HomeController {
     }
 
     @PostMapping("/addCourse")
-    public String processCourse(@Valid @ModelAttribute Course course, BindingResult result) {
+    public String processCourse(@ModelAttribute Course course, BindingResult result) {
         if(result.hasErrors()) {
             return "course/addcourse";
         }
@@ -245,30 +252,12 @@ public class HomeController {
         return "course/coursedetails";
     }
 
-//    @PostMapping("/coursesByDepartment")
-//    public String getCoursesByDepartment(Model model, @RequestParam("department2") String department_name){
-//        Department department = departmentRepository.findByDepartmentName(department_name);
-//        ArrayList<Major> majors = majorRepository.findAllByDepartment(department);
-//        ArrayList<Course> courses = new ArrayList<>();
-//        ArrayList<Course> courseList = new ArrayList<>();
-//
-//        Iterator<Major> majorIterator = majors.iterator();
-//
-//        while (majorIterator.hasNext()) {
-//            Major major = majorIterator.next();
-//            courses = courseRepository.findAllByMajor(major);
-//            Iterator<Course> courseIterator = courses.iterator();
-//
-//            while (courseIterator.hasNext()) {
-//                Course course = courseIterator.next();
-//                courseList.add(course);
-//                courseIterator.remove();
-//            }
-//            majorIterator.remove();
-//        }
-//        model.addAttribute("courses",courseList);
-//        return "courses";
-//    }
+    @PostMapping("/coursesByDepartment")
+    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
+        Department department = departmentRepository.findByDepartmentName(department_name);
+        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
+        return "courses";
+    }
 
     @RequestMapping("/updateCourse/{id}")
     public String updateCourse(@PathVariable("id") long id, Model model)
@@ -475,12 +464,15 @@ public class HomeController {
 //        return "classes";
 //    }
 
-    @PostMapping("/classesByCourse")
-    public String getClassesByCourse(Model model, @RequestParam("course_name") String course_name) {
-        Course course = courseRepository.findByName(course_name);
-        model.addAttribute("classes", classRepository.findAllByCourse(course));
-        return "classes";
-    }
+
+
+// TODO: NOT WORKING
+//    @PostMapping("/classesByCourse")
+//    public String getClassesByCourse(Model model, @RequestParam("course_name") String name) {
+//        Course course = courseRepository.findByName(name);
+//        model.addAttribute("classes", classRepository.findAllByCourse(course));
+//        return "classes";
+//    }
 
     @PostMapping("/classesBySubjectInCurrentSemester")
     public String classesBySubjectInCurrentSemester(Model model, @RequestParam("subject_name") String subject_name) {
@@ -488,8 +480,6 @@ public class HomeController {
         model.addAttribute("classes", classRepository.findAllBySemesterAndSubject("current", subject));
         return "classes";
     }
-
-
 
     @PostMapping("/classroomsByCourse")
     public String classroomsByCourse(Model model, @RequestParam("courseName") String courseName) {
@@ -514,18 +504,8 @@ public class HomeController {
 //        return "classrooms";
 //    }
 
-    @PostMapping("/coursesByDepartment")
-    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
-        Department department = departmentRepository.findByDepartmentName(department_name);
-        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
-        return "courses";
-    }
 
-    @PostMapping("/majorsByDepartment")
-    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
-        Department department = departmentRepository.findByDepartmentName(departmentName);
-        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
-        return "majors";
-    }
+
+
 
 }
