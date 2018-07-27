@@ -3,6 +3,7 @@ package com.example.model;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -20,8 +21,8 @@ public class Course {
     private String detail;
     private int numOfCredits;
 
-    @OneToMany(mappedBy="course")
-    private Collection<Class> classes;
+//    @OneToMany(mappedBy="course")
+//    private Collection<Class> classes;
 
     @OneToMany(mappedBy="course")
     private Collection<Grade> grades;
@@ -30,13 +31,16 @@ public class Course {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "major_id")
     private Major major;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public Set<Class> classes;
 
     public Subject getSubject() {
         return subject;
@@ -69,12 +73,21 @@ public class Course {
     public Course() {
     }
 
-    public Course(int crn, String subjectCode, String name, String detail, int numOfCredits, Collection<Class> classes, Collection<Department> departments) {
+    public Course(int crn, String subjectCode, String name, String detail, int numOfCredits, Collection<Grade> grades, Department department, Major major, Subject subject, Collection<Classroom> classrooms, List<Student> studentList) {
         this.crn = crn;
         this.subjectCode = subjectCode;
         this.name = name;
         this.detail = detail;
         this.numOfCredits = numOfCredits;
+        this.grades = grades;
+        this.department = department;
+        this.major = major;
+        this.subject = subject;
+        this.classrooms = classrooms;
+        this.studentList = studentList;
+    }
+
+    public void setClasses(Set<Class> classes) {
         this.classes = classes;
     }
 
@@ -136,10 +149,6 @@ public class Course {
 
     public Collection<Class> getClasses() {
         return classes;
-    }
-
-    public void setClasses(Collection<Class> classes) {
-        this.classes = classes;
     }
 
     public Collection<Grade> getGrades() {

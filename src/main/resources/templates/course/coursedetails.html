@@ -14,16 +14,16 @@
 
     <h2>Courses</h2>
     <div th:each="course : ${courses}">
-        <span th:inline="text">[[${course.name}]]</span> <br/>
+        <span th:inline="text">[[${course.name}]]</span><br/>
 
         <span sec:authorize="hasAuthority('ADMIN')">
-            <span>
-                <a  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a> &nbsp; - &nbsp;
-            </span>
-            <span>
-                <a th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a> &nbsp;
-            </span>
-        </span> <br>
+            <button class="btn btn-sm btn-info">
+                <a class="text-white"  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a>
+            </button>
+            <button class="btn btn-sm btn-info">
+                <a class="text-white" th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a>
+            </button>
+        </span> <div class="space"></div>
 
     </div>
 

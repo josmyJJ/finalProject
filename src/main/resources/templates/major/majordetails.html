@@ -14,7 +14,15 @@
 
     <h2>Majors</h2>
     <div th:each="major : ${majors}">
-        <span th:inline="text">[[${major.name}]]</span> &nbsp;
+        <span th:inline="text">[[${major.name}]]</span> <br/>
+
+        <button class="btn btn-sm btn-info">
+            <a class="text-white" th:href ="@{/updateMajor/{id}(id=${major.id})}">Update</a>
+        </button>
+        <button class="btn btn-sm btn-info">
+            <a class="text-white" th:href="@{/deleteMajor/{id}(id=${major.id})}"> Delete</a>
+        </button>
+
     </div>
 
     <div class="emptySpace"></div>

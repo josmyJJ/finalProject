@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -85,11 +86,6 @@ public class HomeController {
     @RequestMapping("/admin")
     public String admin(){
         return "admin";
-    }
-
-    @RequestMapping("/instructor")
-    public String instructor(){
-        return "instructor";
     }
 
 
@@ -209,12 +205,19 @@ public class HomeController {
 
     }
 
+    @RequestMapping("deleteMajor/{id}")
+    public String deleteMajor(@PathVariable("id") long id){
+        majorRepository.deleteById(id);
+        return "major/major";
+
+    }
+
 
 // ************************** COURSE ******************************
 
     @RequestMapping("/course")
     public String course(){
-        return "course";
+        return "course/course";
     }
 
     @GetMapping("/add")
@@ -222,16 +225,16 @@ public class HomeController {
         model.addAttribute("course", new Course());
         model.addAttribute("departmentList", departmentRepository.findAll());
         model.addAttribute("majorList", majorRepository.findAll());
-        return "addcourse";
+        return "course/addcourse";
     }
 
     @PostMapping("/addCourse")
     public String processCourse(@Valid @ModelAttribute Course course, BindingResult result) {
         if(result.hasErrors()) {
-            return "addcourse";
+            return "course/addcourse";
         }
         courseRepository.save(course);
-        return "redirect:/";
+        return "course/course";
     }
 
     @RequestMapping("/coursedetail")
@@ -242,7 +245,32 @@ public class HomeController {
             Course item = c.next();
             System.out.println(item.getName());
         }
-        return "coursedetails";
+        return "course/coursedetails";
+    }
+
+    @PostMapping("/coursesByDepartment")
+    public String getCoursesByDepartment(Model model, @RequestParam("department2") String department_name){
+        Department department = departmentRepository.findByDepartmentName(department_name);
+        ArrayList<Major> majors = majorRepository.findAllByDepartment(department);
+        ArrayList<Course> courses = new ArrayList<>();
+        ArrayList<Course> courseList = new ArrayList<>();
+
+        Iterator<Major> majorIterator = majors.iterator();
+
+        while (majorIterator.hasNext()) {
+            Major major = majorIterator.next();
+            courses = courseRepository.findAllByMajor(major);
+            Iterator<Course> courseIterator = courses.iterator();
+
+            while (courseIterator.hasNext()) {
+                Course course = courseIterator.next();
+                courseList.add(course);
+                courseIterator.remove();
+            }
+            majorIterator.remove();
+        }
+        model.addAttribute("courses",courseList);
+        return "courses";
     }
 
     @RequestMapping("/updateCourse/{id}")
@@ -251,49 +279,77 @@ public class HomeController {
         model.addAttribute("course", courseRepository.findById(id));
         model.addAttribute("majors", majorRepository.findAll());
 //        model.addAttribute("subjects", subjectRepository.findAll());
-        return "addcourse";
+        return "course/addcourse";
     }
 
     @RequestMapping("/deleteCourse/{id}")
     public String deleteCourse(@PathVariable("id")long id){
         courseRepository.deleteById(id);
-        return "course";
+        return "course/course";
     }
 
 
 // ************************** CLASSROOM **************************
 
+    @RequestMapping("/classroom")
+    public String classroom(Model model){
+        return "classroom/classrooms";
+    }
+
     @GetMapping("/addclassroom")
     public String addclassroom(Model model){
         model.addAttribute("classroom", new Classroom());
-        return "addclassroom";
+        return "classroom/addclassroom";
     }
 
     @PostMapping("/processclassroom")
     public String processclassroom(@ModelAttribute("classroom") Classroom classroom, Model model){
         classroomRepository.save(classroom);
-        return "redirect:/";
+        return "classroom/classrooms";
     }
+
+    @RequestMapping("/listClassroom")
+    public String listClassrooms(Model model) {
+        model.addAttribute("classrooms", classroomRepository.findAll());
+        return "classroom/classroomdetails";
+    }
+
+    @RequestMapping("/updateClassroom/{id}")
+    public String updateClassroom(@PathVariable("id") long id, Model model)
+    {
+        // model.addAttribute("course", courseRepository.findById(id));
+        // model.addAttribute("majors", majorRepository.findAll());
+//        model.addAttribute("subjects", subjectRepository.findAll());
+        model.addAttribute("classroom", classroomRepository.findById(id));
+        return "classroom/addclassroom";
+    }
+
+    @RequestMapping("/deleteClassroom/{id}")
+    public String deleteClassroom(@PathVariable("id")long id){
+        classroomRepository.deleteById(id);
+        return "classroom/classrooms";
+    }
+
 
 
 // ************************** CLASS ****************************
 
     @RequestMapping("/class")
     public String classPage(Model model){
-        return "classpage";
+        return "class/classpage";
     }
 
     @GetMapping("/addclass")
     public String addclass(Model model){
         model.addAttribute("aclass", new Class());
-        return "addclass";
+        return "class/addclass";
     }
 
     @PostMapping("/processclass")
     public String processclass(@ModelAttribute("aclass") Class aclass){
         classRepository.save(aclass);
         //return "index";
-        return "redirect:/";
+        return "class/classpage";
     }
 
     @RequestMapping("/enroll/{id}")
@@ -360,6 +416,12 @@ public class HomeController {
 
 
 // ******************* CODE FOR INSTRUCTOR ***********************
+
+    @RequestMapping("/instructor")
+    public String instructor(){
+        return "instructor";
+    }
+
 
 
     //*************************Queries**************************

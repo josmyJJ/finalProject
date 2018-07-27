@@ -41,20 +41,19 @@
         </form>
     </div>
 
-    <!--NEEDS FIXING!!!!-->
-    <!--&lt;!&ndash;View all classrooms in a department&ndash;&gt;-->
-    <!--<div sec:authorize="isAuthenticated()">-->
-        <!--<strong>View all classrooms in a department</strong>-->
-        <!--<form action="#"-->
-              <!--th:action="@{/coursesByDepartment}"-->
-              <!--method="post">-->
-            <!--<div class="form-group">-->
-                <!--<label for="department_name">Department name</label>-->
-                <!--<input type="text" id="department_name" name="department_name"/>-->
-                <!--<button type="submit" class="btn btn-primary">Search</button>-->
-            <!--</div>-->
-        <!--</form>-->
-    <!--</div>-->
+    <!--View all courses in a department-->
+    <div sec:authorize="isAuthenticated()">
+        <strong>View all courses in a department</strong>
+        <form action="#"
+              th:action="@{/coursesByDepartment}"
+              method="post">
+            <div class="form-group">
+                <label for="department2">Department Name</label>
+                <input type="text" id="department2" name="department2"/>
+                <button type="submit" class="btn btn-info">Search</button>
+            </div>
+        </form>
+    </div>
 
 
     <!--View all majors in a department-->
