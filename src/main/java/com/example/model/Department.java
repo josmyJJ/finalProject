@@ -2,6 +2,7 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name="Department")
@@ -12,7 +13,7 @@ public class Department {
     @Column(name = "department_id")
     private  long id;
 
-    private String name;
+    private String departmentName;
 
     @OneToMany(mappedBy = "department")
     private Collection<Student> students;
@@ -27,8 +28,9 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private Collection<Course> courses;
 
-    @OneToMany(mappedBy="department")
-    private Collection<Major> majors;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public Set<Major> majors;
 
     public Collection<Class> getClasses() {
         return classes;
@@ -59,19 +61,9 @@ public class Department {
     public Department() {
     }
 
-    public Department(String name, Collection<Student> students, Collection<Instructor> instructors, Collection<Course> courses) {
-        this.name = name;
-        this.students = students;
-        this.instructors = instructors;
-        this.courses = courses;
-    }
 
     public Collection<Major> getMajors() {
         return majors;
-    }
-
-    public void setMajors(Collection<Major> majors) {
-        this.majors = majors;
     }
 
     public long getId() {
@@ -82,12 +74,13 @@ public class Department {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public Collection<Student> getStudents() {
@@ -113,4 +106,10 @@ public class Department {
     public void setCourses(Collection<Course> courses) {
         this.courses = courses;
     }
+
+    public void setMajors(Set<Major> majors) {
+        this.majors = majors;
+    }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class Major {
@@ -11,15 +12,15 @@ public class Major {
     @Column(name = "major_id")
     private  long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToMany(mappedBy="major")
-    private Collection<Student> students;
+    @OneToMany(mappedBy = "major", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public Set<Student> students;
 
-    @OneToMany(mappedBy="major")
-    private Collection<Course> courses;
+    @OneToMany(mappedBy = "major", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    public Set<Course> courses;
 
     private String name;
 
@@ -51,15 +52,17 @@ public class Major {
         return students;
     }
 
-    public void setStudents(Collection<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 
     public Collection<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Collection<Course> courses) {
-        this.courses = courses;
-    }
+
 }

@@ -5,7 +5,7 @@ html {
 
 
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/catBack.jpeg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/uni.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -82,4 +82,8 @@ h1,h2,h3,h4,h5,h6, .navbar{
 .row{
     /*width: 1120px;*/
     margin: 0 auto;
+}
+
+.image{
+    width: 500px;
 }

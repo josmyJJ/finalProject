@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+<body>
+<div th:replace="base :: nav"></div>
+
+<div class="container bg-light pl-5 pr-5">
+
+    <div class="emptySpace"></div>
+
+    <h2>Department Page</h2>
+    <div class="space"></div>
+
+    <div sec:authorize="isAuthenticated()">
+        <!--<div th:each="department:${departments}">-->
+
+            <!--<h5 th:text="${department.departmentName}"></h5>-->
+            <!--<th:block>-->
+                <button class="btn btn-info"><a class="text-white" href="/adddepartment">Add a department</a></button>
+        <button class="btn btn-info"><a class="text-white" href="/listDepartment">List all departments</h3></a></button> <!-- QUERY TO FeIND ALL DEPARTMENTS -->
+        <button class="btn btn-info"><a class="text-white" href="/search#majorDep">Search Majors in Department</h3></a></button>
+        <button class="btn btn-info"><a class="text-white" href="#">Classes in Department</h3></a></button>
+        <button class="btn btn-info"><a class="text-white" href="#">Courses in Department</h3></a></button>
+            <!--</th:block>-->
+        <!--</div>-->
+        <div class="emptySpace"></div>
+    </div>
+
+
+</div>
+<div class="emptySpace"></div>
+
+<footer th:replace="base :: footer"></footer>
+<br/>
+
+<div class="space"></div>
+<div th:replace="base :: scripts"></div>
+</body>
+</html>
+
+

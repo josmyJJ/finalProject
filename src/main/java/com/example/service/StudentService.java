@@ -24,27 +24,28 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public List<Class> GetAllClassesOfStudentByID(int studentId) {
+    public List<Class> getAllClassesOfStudentByID(int studentId) {
         return null;
     }
 
     @Override
-    public List<Class> GetAllSchedules(int studentId) {
+    public List<Class> getAllSchedules(int studentId) {
         return null;
     }
 
     @Override
-    public List<Course> GetAllCoursesByDepartmentID(int departmentId) {
+    public List<Course> getAllCoursesByDepartmentID(int departmentId) {
         return null;
     }
 
     @Override
-    public List<Class> GetClassesOfUserDepartmentById(int studentId, int department) {
+    public List<Class> getClassesOfUserDepartmentById(int studentId, int department) {
         return null;
     }
 
-//    @Override
-//    public List<Major> GetAllMajorsByDepartmentId(int department) {
-//        return null;
-//    }
+    @Override
+    public List<Course> GetAllMajorsByDepartmentId(int department) {
+        return null;
+    }
+
 }

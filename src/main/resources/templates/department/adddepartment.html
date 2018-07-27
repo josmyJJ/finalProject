@@ -17,7 +17,7 @@
     <form action="#" th:action="@{/processdepartment}" th:object="${department}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
-        Department Name : <input type="text" th:field="*{name}"/> <br>
+        Department Name : <input type="text" th:field="*{departmentName}"/> <br>
 
         <input type="submit" value="Submit"/>
     </form>

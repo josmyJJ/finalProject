@@ -125,23 +125,49 @@ public class HomeController {
 
 // ************************ DEPARTMENT ********************************
 
-    @RequestMapping("/dpartment")
+    @RequestMapping("/department")
     public String listdepartment(Model model){
         model.addAttribute("departments", departmentRepository.findAll());
-        return "departmentpage";
+        return "department/department";
     }
 
     @GetMapping("/adddepartment")
     public String adddepartment(Model model){
         model.addAttribute("department", new Department());
-        return "adddepartment";
+        return "department/adddepartment";
     }
 
     @PostMapping("/processdepartment")
     public String processdepartment(@ModelAttribute("department") Department department){
         departmentRepository.save(department);
         //return "index";
-        return "redirect:/";
+        return "admin";
+    }
+
+    @RequestMapping("/listDepartment")
+    public String viewAllDepartment(Model model) {
+        model.addAttribute("departments", departmentRepository.findAll());
+        return "department/departments";
+    }
+
+    // Search for department
+    @RequestMapping("/majorsByDepartment")
+    public String getMajorsByDepartment(Model model, @RequestParam("department") String department_name){
+        Department department = departmentRepository.findByDepartmentName(department_name);
+        model.addAttribute("majors",majorRepository.findAllByDepartment(department));
+        return "majors";
+    }
+
+    @RequestMapping("/updateDepartment/{id}")
+    public String updateDepartment(@PathVariable("id") long id, Model model) {
+        model.addAttribute("department", departmentRepository.findById(id));
+        return "department/adddepartment";
+    }
+
+    @RequestMapping("/deleteDepartment/{id}")
+    public String deleteDepartment(@PathVariable("id")long id){
+        departmentRepository.deleteById(id);
+        return "admin";
     }
 
 
@@ -405,18 +431,18 @@ public class HomeController {
 //        return "classrooms";
 //    }
 
-    @PostMapping("/coursesByDepartment")
-    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
-        Department department = departmentRepository.findByName(department_name);
-        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
-        return "index";
-    }
-
-    @PostMapping("/majorsByDepartment")
-    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
-        Department department = departmentRepository.findByName(departmentName);
-        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
-        return "index";
-    }
+//    @PostMapping("/coursesByDepartment")
+//    public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
+//        Department department = departmentRepository.findByDepartmentName(department_name);
+//        model.addAttribute("courses", courseRepository.findAllByDepartment(department));
+//        return "index";
+//    }
+//
+//    @PostMapping("/majorsByDepartment")
+//    public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
+//        Department department = departmentRepository.findByDepartmentName(departmentName);
+//        model.addAttribute("majors", majorRepository.findAllByDepartment(department));
+//        return "index";
+//    }
 
 }

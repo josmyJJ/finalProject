@@ -22,11 +22,11 @@ public interface IStudentService {
 //    view all majors in a department
 
     List<Student> getAllStudents();
-    List<Class> GetAllClassesOfStudentByID(int studentId);
-    List<Class> GetAllSchedules(int studentId);
-    List<Course> GetAllCoursesByDepartmentID(int departmentId);
-    List<Class> GetClassesOfUserDepartmentById(int studentId, int department);
-//    List<Major> GetAllMajorsByDepartmentId(int department);
+    List<Class> getAllClassesOfStudentByID(int studentId);
+    List<Class> getAllSchedules(int studentId);
+    List<Course> getAllCoursesByDepartmentID(int departmentId);
+    List<Class> getClassesOfUserDepartmentById(int studentId, int department);
+    List<Course> GetAllMajorsByDepartmentId(int department);
 
 
 }

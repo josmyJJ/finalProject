@@ -8,29 +8,31 @@
 <div th:replace="base :: nav"></div>
 
 <div class="container bg-light pl-5 pr-5">
+
+
     <div class="table-responsive">
         <table class="table table-hover text-center">
             <thead>
             <tr>
-                <th class="text-center">Department Name</th>
-                <th class="text-center">Major Name</th>
-                <th sec:authorize="hasAuthority('Admin')"></th>
+                <th class="text-center">Department</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="major : ${majors}">
-                <td><span th:text="${major.department.departmentName}"></span></td>
-                <td><span th:text="${major.name}"></span></td>
-                <td sec:authorize="hasAuthority('Admin')">
-                    <a class="btn btn-primary" th:href ="@{/updateMajor/{id}(id=${major.id})}">Update</a>
+            <tr th:each="department : ${departments}">
+                <td ><span th:text="${department.departmentName}"></span></td>
+                <td ><!--&lt;!&ndash;Sample button link&ndash;&gt;-->
+                    <a class="btn btn-info" th:href ="@{/updateDepartment/{id}(id=${department.id})}">Update</a>
+                    <a class="btn btn-info" th:href ="@{/deleteDepartment/{id}(id=${department.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </div>
 <div class="emptySpace"></div>
-
 <footer th:replace="base :: footer"></footer>
 <br/>
 
