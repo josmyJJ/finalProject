@@ -15,16 +15,27 @@
         <table class="table table-hover text-center">
             <thead>
             <tr>
+                <th class="text-center">Department</th>
+                <th class="text-center">Subject</th>
                 <th class="text-center">CRN Number</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Instructor</th>
                 <th class="text-center">Time</th>
                 <th class="text-center">Course Number</th>
+                <th class="text-center">Semester</th>
+
             </tr>
             </thead>
             <tbody>
             <tr th:each="class : ${classes}">
+                <td><span th:text="${class.course.major.department.departmentName}"></span></td>
+                <td><span th:text="${class.course.subject.subjectName}"></span></td>
                 <td ><span th:text="${class.crnNumber}"></span></td>
+                <td><span th:text="${class.course.name}"></span></td>
+                <td><span th:text="${class.instructor.name}"></span></td>
                 <td ><span th:text="${class.time}"></span></td>
                 <td ><span th:text="${class.courseNumber}"></span></td>
+                <td><span th:text="${class.semester}"></span></td>
             </tr>
             </tbody>
         </table>

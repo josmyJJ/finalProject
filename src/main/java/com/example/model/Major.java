@@ -12,6 +12,8 @@ public class Major {
     @Column(name = "major_id")
     private  long id;
 
+    private String name;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
@@ -21,8 +23,6 @@ public class Major {
 
     @OneToMany(mappedBy = "major", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     public Set<Course> courses;
-
-    private String name;
 
     public long getId() {
         return id;

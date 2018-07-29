@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -140,14 +139,6 @@ public class HomeController {
         return "department/departments";
     }
 
-    // Search for department
-    @RequestMapping("/majorsByDepartment")
-    public String getMajorsByDepartment(Model model, @RequestParam("department") String department_name){
-        Department department = departmentRepository.findByDepartmentName(department_name);
-        model.addAttribute("majors",majorRepository.findAllByDepartment(department));
-        return "majors";
-    }
-
     @RequestMapping("/updateDepartment/{id}")
     public String updateDepartment(@PathVariable("id") long id, Model model) {
         model.addAttribute("department", departmentRepository.findById(id));
@@ -194,7 +185,7 @@ public class HomeController {
     public String majorsByDepartment(Model model, @RequestParam("departmentName") String departmentName) {
         Department department = departmentRepository.findByDepartmentName(departmentName);
         model.addAttribute("majors", majorRepository.findAllByDepartment(department));
-        return "majors";
+        return "major/majors";
     }
 
     @RequestMapping("/updateMajor/{id}")
@@ -203,7 +194,6 @@ public class HomeController {
         model.addAttribute("major", majorRepository.findById(id));
         model.addAttribute("departments", departmentRepository.findAll());
         return "major/addmajor";
-
     }
 
     @RequestMapping("deleteMajor/{id}")

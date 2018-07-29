@@ -39,21 +39,21 @@
                 <td><span th:text="${aClass.semester}"></span></td>
                 <td>
                     <div sec:authorize="hasAuthority('ADMIN')">
-                        <p><a class="btn btn-primary" th:href ="@{/updateClass/{id}(id=${aClass.id})}">Update</a></p>
-                        <p><a class="btn btn-primary" th:href ="@{/deleteClass/{id}(id=${aClass.id})}">Delete</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/updateClass/{id}(id=${aClass.id})}">Update</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/deleteClass/{id}(id=${aClass.id})}">Delete</a></p>
                     </div>
                     <div sec:authorize="hasAuthority('STUDENT')">
-                        <p><a class="btn btn-primary" th:href ="@{/enrollClassForStudent/{id}(id=${aClass.id})}">Enroll</a></p>
-                        <p><a class="btn btn-primary" th:href ="@{/dropClassForStudent/{id}(id=${aClass.id})}">Drop</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/enrollClassForStudent/{id}(id=${aClass.id})}">Enroll</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/dropClassForStudent/{id}(id=${aClass.id})}">Drop</a></p>
                     </div>
                     <div sec:authorize="hasAuthority('ADVISOR')">
                         <input type="hidden" th:value ="${student_in}" name = "student_id">
-                        <p><a class="btn btn-primary" th:href ="@{/enrollClassForAdvisor/{id}(id=${aClass.id})}">Enroll</a></p>
-                        <p><a class="btn btn-primary" th:href ="@{/dropClassForAdvisor/{id}(id=${aClass.id})}">Drop</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/enrollClassForAdvisor/{id}(id=${aClass.id})}">Enroll</a></p>
+                        <p><a class="btn btn-info" th:href ="@{/dropClassForAdvisor/{id}(id=${aClass.id})}">Drop</a></p>
                     </div>
 
                     <div sec:authorize="hasAuthority('INSTRUCTOR')">
-                        <p><a class="btn btn-primary" th:href ="@{/viewStudentInClass/{id}(id=${aClass.id})}">View Student</a>
+                        <p><a class="btn btn-info" th:href ="@{/viewStudentInClass/{id}(id=${aClass.id})}">View Student</a>
                     </div>
                 </td>
             </tr>

@@ -71,8 +71,8 @@
     <!--</div>-->
 
     <!--View all courses in a department-->
-    <div sec:authorize="isAuthenticated()">
-        <strong>View all courses in a department</strong>
+    <div id="coursDep" sec:authorize="isAuthenticated()">
+        <h5>View all courses in a department:</h5>
         <form action="#"
               th:action="@{/coursesByDepartment}"
               method="post">
@@ -87,7 +87,7 @@
 
     <!--View all majors in a department-->
     <div id="majorDep" sec:authorize="isAuthenticated()">
-        <strong>View all majors in a department</strong>
+        <h5>View all majors in a department:</h5>
         <form action="#"
               th:action="@{/majorsByDepartment}"
               method="post">
