@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 html {
     position: relative;
     min-height: 100%;
@@ -9,12 +12,13 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
 }
 
 h1,h2,h3,h4,h5,h6, .navbar{
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Ubuntu', sans-serif;
+    /*font-family: 'Shadows Into Light', cursive;*/
 }
 
 .center-text {

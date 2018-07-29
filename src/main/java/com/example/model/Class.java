@@ -12,19 +12,9 @@ public class Class {
     @Column(name = "class_id")
     private  long id;
 
-    public String getSemester() {
-        return semester;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
-
     private String crnNumber;
-
     private String time;
     private String semester;
-
     private int courseNumber;
 
 
@@ -52,10 +42,16 @@ public class Class {
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;
 
-
     public Class() {
     }
 
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
 
     public Collection<Student> getStudents() {
         return students;

@@ -12,20 +12,43 @@
 <div class="container bg-light pl-5 pr-5">
     <div class="space"></div>
 
-    <h2>Courses</h2>
-    <div th:each="course : ${courses}">
-        <span th:inline="text">[[${course.name}]]</span><br/>
+    <h2>All Courses</h2>
+    <div class="space"></div>
 
-        <span sec:authorize="hasAuthority('ADMIN')">
-            <button class="btn btn-sm btn-info">
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">CRN</th>
+            <th scope="col">Subject Code</th>
+            <th scope="col">Details</th>
+            <th scope="col">Credits</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td scope="row"><span th:text="${course.name}"></span></td>
+            <td scope="row"><span th:text="${course.crn}"></span></td>
+            <td scope="row"><span th:text="${course.subjectCode}"></span></td>
+            <td scope="row"><span th:text="${course.detail}"></span></td>
+            <td scope="row"><span th:text="${course.numOfCredits}"></span></td>
+            <td><span sec:authorize="hasAuthority('ADMIN')">
+                <button class="btn btn-sm btn-info">
                 <a class="text-white"  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a>
-            </button>
-            <button class="btn btn-sm btn-info">
+                </button>
+                <button class="btn btn-sm btn-info">
                 <a class="text-white" th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a>
-            </button>
-        </span> <div class="space"></div>
+                </button>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
-    </div>
+
+
 
     <span sec:authorize="hasAuthority('STUDENT')">
         <button class="btn btn-info"><a class="text-white" href="/search">View classes in a department</a></button>

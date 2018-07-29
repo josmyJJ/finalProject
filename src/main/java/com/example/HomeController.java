@@ -69,9 +69,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("departments", departmentRepository.findAll());
-        model.addAttribute("classrooms", classroomRepository.findAll());
-        model.addAttribute("classes", classRepository.findAll());
         return "index";
     }
 
