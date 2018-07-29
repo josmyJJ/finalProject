@@ -7,33 +7,13 @@ import java.util.List;
 @Entity
 @Table(name="Classroom")
 public class Classroom {
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "classroom_id")
     private  long id;
-
     private String buildingName;
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
     private String roomNumber;
     private int maxCapacity;
-
-
 
     @OneToMany(mappedBy="classroom")
 
@@ -42,8 +22,6 @@ public class Classroom {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
-
-
 
     @ManyToMany
     @JoinTable
@@ -77,6 +55,22 @@ public class Classroom {
 
     public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public int getMaxCapacity() {

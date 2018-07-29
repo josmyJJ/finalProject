@@ -11,13 +11,13 @@
 
     <div class="table-responsive">
         <table class="table table-hover text-center">
-            <thead>
+            <thead class="thead-dark">
             <tr>
                 <th>Department</th>
                 <th>Course Number</th>
                 <th>Course Name</th>
                 <th>Credits</th>
-                <th></th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
             </tr>
             </thead>
             <tbody>
@@ -28,8 +28,8 @@
                 <td ><span th:text="${course.name}"></span></td>
                 <td ><span th:text="${course.numOfCredits}"></span></td>
                 <td ><span th:text="${course.detail}"></span></td>
-                <td >
-                    <a class="btn btn-info" th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <a class="text-info" th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a> &nbsp;
                 </td>
             </tr>
             </tbody>

@@ -14,14 +14,14 @@
             <tr>
                 <th class="text-center">Department Name</th>
                 <th class="text-center">Major Name</th>
-                <th sec:authorize="hasAuthority('Admin')"></th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="major : ${majors}">
                 <td><span th:text="${major.department.departmentName}"></span></td>
                 <td><span th:text="${major.name}"></span></td>
-                <td sec:authorize="hasAuthority('Admin')">
+                <td sec:authorize="hasAuthority('ADMIN')">
                     <a class="btn btn-primary" th:href ="@{/updateMajor/{id}(id=${major.id})}">Update</a>
                 </td>
             </tr>

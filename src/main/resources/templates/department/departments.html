@@ -12,19 +12,18 @@
 
     <div class="table-responsive">
         <table class="table table-hover text-center">
-            <thead>
+            <thead class="thead-dark">
             <tr>
                 <th class="text-center">Department</th>
-                <th></th>
-                <th></th>
+                <th sec:authorize="hasAuthority('ADMIN')"> </th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="department : ${departments}">
                 <td ><span th:text="${department.departmentName}"></span></td>
-                <td ><!--&lt;!&ndash;Sample button link&ndash;&gt;-->
-                    <a class="btn btn-info" th:href ="@{/updateDepartment/{id}(id=${department.id})}">Update</a>
-                    <a class="btn btn-info" th:href ="@{/deleteDepartment/{id}(id=${department.id})}">Delete</a>
+                <td sec:authorize="hasAuthority('ADMIN')"><!--&lt;!&ndash;Sample button link&ndash;&gt;-->
+                    <a class="text-info" th:href ="@{/updateDepartment/{id}(id=${department.id})}">Update</a> &nbsp;
+                    <a class="text-info" th:href ="@{/deleteDepartment/{id}(id=${department.id})}">Delete</a> &nbsp;
                 </td>
             </tr>
             </tbody>
@@ -35,7 +34,6 @@
 <div class="emptySpace"></div>
 <footer th:replace="base :: footer"></footer>
 <br/>
-
 <div class="space"></div>
 <div th:replace="base :: scripts"></div>
 </body>

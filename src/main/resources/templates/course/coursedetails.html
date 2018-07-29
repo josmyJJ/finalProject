@@ -15,7 +15,6 @@
     <h2>All Courses</h2>
     <div class="space"></div>
 
-
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -24,7 +23,7 @@
             <th scope="col">Subject Code</th>
             <th scope="col">Details</th>
             <th scope="col">Credits</th>
-            <th></th>
+            <th sec:authorize="hasAuthority('ADMIN')"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,17 +34,15 @@
             <td scope="row"><span th:text="${course.detail}"></span></td>
             <td scope="row"><span th:text="${course.numOfCredits}"></span></td>
             <td><span sec:authorize="hasAuthority('ADMIN')">
-                <button class="btn btn-sm btn-info">
-                <a class="text-white"  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a>
-                </button>
-                <button class="btn btn-sm btn-info">
-                <a class="text-white" th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a>
-                </button>
+                <a class="text-info"  th:href ="@{/updateCourse/{id}(id=${course.id})}">Update</a> &nbsp;
+                <a class="text-info" th:href ="@{/deleteCourse/{id}(id=${course.id})}">Delete</a> &nbsp;
                 </span>
             </td>
         </tr>
         </tbody>
     </table>
+
+
     <span sec:authorize="hasAuthority('STUDENT')">
         <button class="btn btn-info"><a class="text-white" href="/search#coursDep">View courses in a department</a></button>
     </span>

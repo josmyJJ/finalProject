@@ -81,6 +81,11 @@ public class HomeController {
         return "admin";
     }
 
+    @RequestMapping("/search")
+    public String search() {
+        return "search";
+    }
+
 
 // ********************** REGISTRATION **********************
 
@@ -243,7 +248,7 @@ public class HomeController {
     public String coursesByDepartment(Model model, @RequestParam("department_name") String department_name) {
         Department department = departmentRepository.findByDepartmentName(department_name);
         model.addAttribute("courses", courseRepository.findAllByDepartment(department));
-        return "courses";
+        return "course/courses";
     }
 
     @RequestMapping("/updateCourse/{id}")
@@ -351,7 +356,7 @@ public class HomeController {
 
     @RequestMapping("/student")
     public String student(){
-        return "student";
+        return "student/student";
     }
 
     @RequestMapping("/schedule")
@@ -362,7 +367,7 @@ public class HomeController {
             Student item = s.next();
             System.out.println(item.getName());
         }
-        return "studentschedule";
+        return "student/studentschedule";
     }
 
     @RequestMapping("/studentschedule")
@@ -370,7 +375,7 @@ public class HomeController {
         model.addAttribute("classes", classRepository.findAll());
         model.addAttribute("classroom", classroomRepository.findAll());
         //return "classlist";
-        return "studentschedule";
+        return "student/studentschedule";
     }
 
 
@@ -378,7 +383,7 @@ public class HomeController {
 
     @RequestMapping("/advisor")
     public String advisor(){
-        return "advisor";
+        return "advisor/advisor";
     }
 
     @RequestMapping("/advisorPage")
@@ -390,7 +395,7 @@ public class HomeController {
             Student item = s.next();
             System.out.println(item.getName());
         }
-        return "studentdetails";
+        return "student/studentdetails";
     }
 
 
@@ -398,13 +403,13 @@ public class HomeController {
 
     @RequestMapping("/instructor")
     public String instructor(){
-        return "instructor";
+        return "instructor/instructor";
     }
 
     @GetMapping("/addinstructor")
     public String addinstructor(Model model){
         model.addAttribute("instructor", new Instructor());
-        return "addinstructor";
+        return "instructor/addinstructor";
     }
 
     @PostMapping("/processinstructor")
@@ -412,85 +417,6 @@ public class HomeController {
         instructorRepository.save(instructor);
         return "redirect:/";
     }
-
-
-    //*************************Queries**************************
-
-    @RequestMapping("/search")
-    public String search() {
-        return "search";
-    }
-
-    @RequestMapping("/classesInCurrentSemester")
-    public String classesInCurrentSemester(Model model) {
-        model.addAttribute("classes", classRepository.findAllBySemester("current"));
-        return "classes";
-    }
-
-//    @PostMapping("/classesByInstructor")
-//    public String classesByInstructor(Model model, @RequestParam("instructorname") String instructorName) {
-//        User user = userRepository.findByUsername(instructorName);
-//        Instructor instructor = instructorRepository.findByUser(user);
-//        model.addAttribute("classes", classRepository.findAllByInstructor(instructor));
-//        return "classes";
-//    }
-
-//    @PostMapping("/classesByStudent")
-//    public String classesByStudent(Model model, @RequestParam("studentname") String studentName) {
-//        User user = userRepository.findByUsername(studentName);
-//        Student student = studentRepository.findByUser(user);
-//        model.addAttribute("classes", classRepository.findAllByStudent(student));
-//        return "classes";
-//    }
-//
-//    @PostMapping("/classesTaughtByInstructor")
-//    public String classesTaughtByInstructor(Model model, @RequestParam("instructorname1") String instructorName) {
-//        User user = userRepository.findByUsername(instructorName);
-//        Instructor instructor = instructorRepository.findByUser(user);
-//        model.addAttribute("classes", classRepository.findAllBySemesterAndInstructor("current", instructor));
-//        return "classes";
-//    }
-
-
-
-// TODO: NOT WORKING
-//    @PostMapping("/classesByCourse")
-//    public String getClassesByCourse(Model model, @RequestParam("course_name") String name) {
-//        Course course = courseRepository.findByName(name);
-//        model.addAttribute("classes", classRepository.findAllByCourse(course));
-//        return "classes";
-//    }
-
-    @PostMapping("/classesBySubjectInCurrentSemester")
-    public String classesBySubjectInCurrentSemester(Model model, @RequestParam("subject_name") String subject_name) {
-        Subject subject = subjectRepository.findBySubjectName(subject_name);
-        model.addAttribute("classes", classRepository.findAllBySemesterAndSubject("current", subject));
-        return "classes";
-    }
-
-    @PostMapping("/classroomsByCourse")
-    public String classroomsByCourse(Model model, @RequestParam("courseName") String courseName) {
-        Course course = courseRepository.findByName(courseName);
-        model.addAttribute("classrooms", classroomRepository.findAllByCourses(course));
-        return "classroom/allclassrooms";
-    }
-
-//    @PostMapping("/classroomsByInstructor")
-//    public String classroomsByInstructor(Model model, @RequestParam("instructor_name") String instructor_name) {
-//        User user = userRepository.findByUsername(instructor_name);
-//        Instructor instructor = instructorRepository.findByUser(user);
-//        model.addAttribute("classrooms", classroomRepository.findAllByInstructor(instructor));
-//        return "classrooms";
-//    }
-
-//    @PostMapping("/classroomsByStudent")
-//    public String classroomsByStudent(Model model, @RequestParam("student_name") String student_name) {
-//        User user = userRepository.findByUsername(student_name);
-//        Student student = studentRepository.findByUser(user);
-//        model.addAttribute("classrooms", classroomRepository.findAllByStudent(student));
-//        return "classrooms";
-//    }
-
 
 
 

@@ -16,10 +16,6 @@
 
 
     <div th:each="student : ${students}">
-
-        <!--<div class="cont-box">-->
-        <!--<span>Student Name</span>-->
-        <!--<div th:text="${student.name}"></div>-->
         Student Name: <span th:inline="text">[[${student.name}]]</span> &nbsp;
 
         Student ID: <span th:inline="text">[[${student.id}]]</span> &nbsp;
@@ -44,17 +40,6 @@
                 </th:block>
             </ul>
         </div>
-
-    <!--<tbody>-->
-    <!--<tr th:each="class : ${st.classes}">-->
-        <!--<td><span th:text="${class.crn}"></span></td>-->
-        <!--<td><span th:text="${class.course.courseName}"></span></td>-->
-        <!--<td><span th:text="${class.day}"></span></td>-->
-        <!--<td><span th:text="${class.time}"></span></td>-->
-        <!--<td><span th:text="${class.classroom.buildingName}"></span></td>-->
-        <!--<td><span th:text="${class.classroom.roomNum}"></span></td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
 
     <div class="emptySpace"></div>
 
